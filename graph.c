@@ -127,5 +127,6 @@ dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
         }
     }
     free(PQ);
+    free(PQ->Harr);
     return answer;
 }
