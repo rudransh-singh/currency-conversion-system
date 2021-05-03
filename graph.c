@@ -1,5 +1,7 @@
 #include "graph.h"
+#include "priorityqueue.h"
 #include <stdio.h>
+#include <limits.h>
 #include <stdlib.h>
 PtrToGraphList CreateGraph(int NumberOfVertices)
 {
@@ -78,8 +80,52 @@ void PrintGraph(PtrToGraphList G)
             printf("%d(w=%d)---->",temp->VertexID,temp->weight);
         }
         printf("%d(w=%d)\n",temp->VertexID,temp->weight);//to make sure that the last neighbour doesn't get printed with an arrow we print it separately
-
     }
     return;
 }
 
+dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
+{
+    int vis[NumberOfVertices];//Creates a array which will store the visited nodes
+    dijkstra answer;
+    answer.dist=(int*)malloc(sizeof(int)*NumberOfVertices);
+    answer.prev=(int*)malloc(sizeof(int)*NumberOfVertices);
+    for(int i=0;i<NumberOfVertices;i++)
+    {
+        answer.dist[i]=INT_MAX;//setting all dist values to inf(INT_MAX)
+        answer.prev[i]=-1;//setting all prev values to NULL(here -1)
+        vis[i]=0;//setting visited array to 0 for all elements in the array
+    }
+    answer.dist[startindex]=0;//set startindex dist to zero to kickstart algo
+    PtrToMinHeap PQ=NULL;//create empty priority queue
+    PQ=CreateHeap(10000);
+    InsertMinHeapKeyValue(PQ,startindex,0);//This will ensure that algo is kickstarted properly
+    while(PQ->heap_size!=0)
+    {
+        HeapNode tempheapnode;
+        tempheapnode=ExtractMin(PQ);//Extract the most promising key-value pair
+        vis[tempheapnode.key]=1;//set vis of index in tempnode to true meaning that node has been visited
+        if(answer.dist[tempheapnode.key]<tempheapnode.value)
+            continue;//Stale Node optimization to ensure that nodes aren't visited multiple times
+        PtrToGraphNode tempgraphnode;
+        tempgraphnode=G->GraphVertexArray[tempheapnode.key];
+        if(tempgraphnode==NULL)//if the vertex has no neighbours then skip(control flow will definitely not reach here but still)
+        continue;
+        for(;tempgraphnode->next;tempgraphnode=tempgraphnode->next)// traversing through the adjacency list of a particular index
+        {
+            if(vis[tempgraphnode->VertexID])//if the node has already been visited(i.e smallest distance has been found) then skip
+            continue;
+            int newDist=0;
+            newDist=answer.dist[tempheapnode.key]+tempgraphnode->weight;
+            if(newDist < answer.dist[tempgraphnode->VertexID])//This is the relaxation part of dijkstra algo
+            {
+                //if we have found a better distance then update the prev dist array as well as the heap
+                answer.prev[tempgraphnode->VertexID]=tempheapnode.key;
+                answer.dist[tempgraphnode->VertexID]=newDist;
+                InsertMinHeapKeyValue(PQ,tempgraphnode->VertexID,newDist);
+            }
+        }
+    }
+    free(PQ);
+    return answer;
+}
