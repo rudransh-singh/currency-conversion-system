@@ -22,6 +22,7 @@ void AddTradeBank(char* BankName){ // we use this function to open a new bank in
         Head = ListofTradeBank;
 
         Tail->next = NULL;
+        NoOfTradeBanks++;
     }
     else{
 
@@ -41,15 +42,16 @@ void AddTradeBank(char* BankName){ // we use this function to open a new bank in
     Tail = NewBank;     // updating the tail
 
     Tail->next = NULL;
+    NoOfTradeBanks++;
     }
-    }
+ }
 }//we have to figure out how to create a new trade bank with variable name given to us by user
 
 
 void AddCurrencyExchange(char* BankName,char* Currency1 , char* Curreny2 , int ConversionRate , int commission){
-    char TradeBankName[50], Currency1[50],Currency2[50];
-    int exchangerate , commission;
-    scanf("%s %s %s %d %d",TradeBankName,Currency1,Currency2,exchangerate,commission);
+    // char TradeBankName[50], Currency1[50],Currency2[50];
+    // int exchangerate , comm;
+    // scanf("%s %s %s %d %d",TradeBankName,Currency1,Currency2,&exchangerate,&commission);
     // for()check if the TradeBankName exist ya nahi;
     // nahi hua toh naya bana denge , else we ll just add the curr1 and 2 to the bank;
     // if it doesnot exist we ll AddTradeBank(TradeBankName);
