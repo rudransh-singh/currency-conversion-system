@@ -6,6 +6,7 @@ typedef struct Tradebank Tradebank;//typdefing structures
 typedef Tradebank* PtrToTradebank;//typedefing pointers to tradebank
 struct Tradebank {
     char NameOfTradeBank[100];//Stores the name of the trade bank
+    PtrToTradebank next;
     // add graph details later
 };
 
