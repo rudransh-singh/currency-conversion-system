@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include <string.h>
 
-char CurrencyList[1000][100];//Global Currency List
+// char CurrencyList[1000][100];//Global Currency List
 int CurrencyListCounter=0;//will keep track of the number of currencies inserted to the graph 
 PtrToTradebank ListofTradeBank; // Linked List to store the TradeBanks
 PtrToTradebank Tail; // To keep track of last added bank
@@ -16,33 +16,133 @@ int NoOfTradeBanks = 0; // To keep track of number of banks added
 
 
 
-void AddCurrencyToGlobalList(char* inputcurrency)
+// void AddCurrencyToGlobalList(char* inputcurrency)
+// {
+//     strcat(CurrencyList[CurrencyListCounter],inputcurrency);
+//     CurrencyListCounter++;
+// }
+
+// int LookupCurrencyVertex(char* inputcurrency)//will convert the currency name to the corresponding vertex from the currencylist
+// {
+//     for(int i=0;i<CurrencyListCounter;i++)//going through the array to figure out the index where the given currency is stored
+//     {
+//         if(strcmp(CurrencyList[i],inputcurrency)==0)//if currency found then return the index(which will also be our vertex)
+//         return i;
+//     }
+//     return -1;//if not found then return -1
+// }
+
+// void PrintAllCurrencies()
+// {
+//     for(int i=0;i<CurrencyListCounter;i++)
+//     {
+//         printf("%s---->",CurrencyList[i]);
+//     }
+//     return;
+// }
+PtrToCurrencyNode CreateEmptyCurrList()//creates a dummy node and returns it's value
 {
-    strcat(CurrencyList[CurrencyListCounter],inputcurrency);
-    CurrencyListCounter++;
+    PtrToCurrencyNode t;
+    t=(PtrToCurrencyNode)(malloc)(sizeof(currencynode));
+    strcpy(t->NameOfCurrency,"undefined");
+    t->Vertexid=-1;
+    return t;
+}
+int searchforcurrency(char *inputcurrency, PtrToCurrencyNode C)//search for the input currency in the given currency linked list
+{
+    if(C->next==NULL)
+    {
+        printf("list is empty");
+        return -1;
+    }
+    PtrToCurrencyNode tempnode;//temporary pointer used to traverse the entire linked list
+    tempnode=C->next;//set the tempnode to point to head of linked list
+    for(;tempnode;tempnode=tempnode->next)
+    {
+        if(strcmp(inputcurrency,tempnode->NameOfCurrency)==0)
+        {
+            return tempnode->Vertexid;//return the vertex id of the currency in the linked list
+        }
+    }
+    return -1;//if the element is not found in the linked list then return zero
 }
 
-int LookupCurrencyVertex(char* inputcurrency)//will convert the currency name to the corresponding vertex from the currencylist
+void addcurrency(char *inputcurrency,int vertexid ,PtrToCurrencyNode c)//add the input currency to the currency linked list
 {
-    for(int i=0;i<CurrencyListCounter;i++)//going through the array to figure out the index where the given currency is stored
+    //if list is empty then do nothing
+    if(c->next==NULL)
     {
-        if(strcmp(CurrencyList[i],inputcurrency)==0)//if currency found then return the index(which will also be our vertex)
-        return i;
+        PtrToCurrencyNode temp;
+        temp=(PtrToCurrencyNode)malloc(sizeof(currencynode));
+        strcpy(temp->NameOfCurrency,inputcurrency);
+        temp->Vertexid=vertexid;
+        temp->next=c->next;
+        c->next=temp;
+        return;
     }
-    return -1;//if not found then return -1
+    //first search for the currency in the given linked list
+    int search=searchforcurrency(inputcurrency,c);//searches for the currency in the linked list
+    if(search!=-1)
+    {
+        printf("currency already exists");//if the function returns -1 that means the currency wasn't there in the linked list
+        return;
+    }
+    else
+    {
+        PtrToCurrencyNode temp;//create a temporary currency node which will be inserted
+        temp=(PtrToCurrencyNode)malloc(sizeof(currencynode));//malloc a node and return it's pointer to temp
+        strcpy(temp->NameOfCurrency,inputcurrency);
+        temp->Vertexid=vertexid;
+        temp->next=c->next;
+        c->next=temp;//inserting the node to the front of the linked list
+    }
 }
 
-void PrintAllCurrencies()
+void deletecurrency(char *inputcurrency, PtrToCurrencyNode c)//deletes the node from the given currency list
 {
-    for(int i=0;i<CurrencyListCounter;i++)
+    int search=searchforcurrency(inputcurrency, c);//searches for the currency in the linked list
+    if(search==-1)
     {
-        printf("%s---->",CurrencyList[i]);
+        printf("currency does not exist");
+        return;
     }
+    else{
+        if(strcmp(c->next->NameOfCurrency,inputcurrency)==0)//if the first node itself is the node to be deleted
+        {
+            PtrToCurrencyNode temp=c->next;
+            c->next=c->next->next;
+            free(temp);
+        }
+        else
+        {
+            PtrToCurrencyNode temp=c->next->next;
+            PtrToCurrencyNode prev=c->next;
+            for(;temp;temp=temp->next,prev=prev->next)
+            {   
+                if(strcmp(temp->NameOfCurrency,inputcurrency)==0)
+                {
+                prev->next=temp->next;
+                free(temp);
+                }
+            }
+        
+        }
+        return;
+    }
+}
+
+
+void printcurrencylist(PtrToCurrencyNode C)
+{
+    PtrToCurrencyNode temp;
+    temp=C->next;
+    for(;temp;temp=temp->next)
+    {
+        printf("{%s,%d}",temp->NameOfCurrency,temp->Vertexid);
+    }
+    printf("\n");
     return;
 }
-
-
-
 
 
 

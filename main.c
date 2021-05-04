@@ -5,17 +5,17 @@
 #include "UserInterface.c"
 int main()
 {   
-    while(1){
-    printf("Enter Bank Name ->");
-    char BankName[50];
-    scanf("%s",BankName);
-    AddTradeBank(BankName);
-    if(strcmp(BankName,"quit") == 0)break;
-    }
-    while(Head!=NULL){
-        printf("%s ",Head->NameOfTradeBank);
-        Head = Head->next;
-    }
+    // while(1){
+    // printf("Enter Bank Name ->");
+    // char BankName[50];
+    // scanf("%s",BankName);
+    // AddTradeBank(BankName);
+    // if(strcmp(BankName,"quit") == 0)break;
+    // }
+    // while(Head!=NULL){
+    //     printf("%s ",Head->NameOfTradeBank);
+    //     Head = Head->next;
+    // }
     //checking whether Graphlist works
     // PtrToGraphList G=NULL;
     // G=CreateGraph(10);
