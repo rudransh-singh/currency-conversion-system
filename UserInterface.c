@@ -48,7 +48,7 @@ void AddTradeBank(char* BankName){ // we use this function to open a new bank in
 }//we have to figure out how to create a new trade bank with variable name given to us by user
 
 
-void AddCurrencyExchange(char* BankName,char* Currency1 , char* Curreny2 , int ConversionRate , int commission){
+void AddCurrencyExchange(char* BankName,char* Currency1 , char* Currency2 , int ConversionRate){
     // char TradeBankName[50], Currency1[50],Currency2[50];
     // int exchangerate , comm;
     // scanf("%s %s %s %d %d",TradeBankName,Currency1,Currency2,&exchangerate,&commission);
@@ -59,7 +59,7 @@ void AddCurrencyExchange(char* BankName,char* Currency1 , char* Curreny2 , int C
 
 }
 
-void UpdateCommission(PtrToTradebank BankName, char* Currency1, char* Currency2, int commission)
+void UpdateConversionRate(char* BankName, char* Currency1, char* Currency2, int ConversionRate)
 {
     PtrToGraphNode temp;
 

@@ -13,15 +13,15 @@
 
 void AddTradeBank(char* BankName);// Parth Anish
 
-void AddCurrencyExchange(char* BankName,char* Currency1 , char* Curreny2 , int ConversionRate , int commission); // Parth nd Anish
+void AddCurrencyExchange(char* BankName,char* Currency1 , char* Currency2 , int ConversionRate); // Parth nd Anish
 
 void DeleteTradeBank(char* BankName);//Rohan 
 
 void DeleteCurrency(char* BankName,char* CurrencyName); // RP
  
-void UpdateCommission(char* BankName,char* Currency1 , char* Curreny2, int commission); // Vikram
+// void UpdateCommission(char* BankName,char* Currency1 , char* Curreny2, int commission); // Vikram
 
-void UpdateCurrencyExchange(char* BankName,char* Currency1 , char* Curreny2 , int ConversionRate ); // Vikram
+void UpdateCurrencyExchange(char* BankName, char* Currency1, char* Currency2, int ConversionRate); // Vikram
 
 
 #endif
