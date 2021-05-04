@@ -9,6 +9,7 @@ struct Tradebank{
 };
 
 typedef struct currency currency;
+typedef struct currency* PtrToCurrency;
 struct currency{
     char NameOfCurrency[100];// stores the name of the currency
     //add currency value later
