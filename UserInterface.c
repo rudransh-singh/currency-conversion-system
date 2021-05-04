@@ -59,3 +59,28 @@ void AddCurrencyExchange(char* BankName,char* Currency1 , char* Curreny2 , int C
 
 }
 
+void UpdateCommission(PtrToTradebank BankName, char* Currency1, char* Currency2, int commission)
+{
+    PtrToGraphNode temp;
+
+    //update commission for conversion from currency 1 to currency 2
+    temp = BankName->CurrencyGraph->GraphList[currency1_id];
+
+    while(temp != NULL && temp->VertexID != currency2_id) {
+        temp = temp->next;
+    }
+    if (temp)
+        temp->weight = commission;
+
+    //update commission for conversion from currency 2 to currency 1
+    temp = BankName->CurrencyGraph->GraphList[currency2_id];
+
+    while(temp != NULL && temp->VertexID != currency1_id) {
+        temp = temp->next;
+    }
+    if (temp)
+        temp->weight = commission;
+
+    return;
+}
+
