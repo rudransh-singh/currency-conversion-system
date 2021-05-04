@@ -1,16 +1,51 @@
-#include "UserInterface.h"
 #include "graph.h"
+#include "UserInterface.h"
+#include "priorityqueue.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
 #include <string.h>
 
-
+char CurrencyList[1000][100];//Global Currency List
+int CurrencyListCounter=0;//will keep track of the number of currencies inserted to the graph 
 PtrToTradebank ListofTradeBank; // Linked List to store the TradeBanks
 PtrToTradebank Tail; // To keep track of last added bank
 PtrToTradebank Head; // To keep track of first added bank
 int NoOfTradeBanks = 0; // To keep track of number of banks added
+
+
+
+void AddCurrencyToGlobalList(char* inputcurrency)
+{
+    strcat(CurrencyList[CurrencyListCounter],inputcurrency);
+    CurrencyListCounter++;
+}
+
+int LookupCurrencyVertex(char* inputcurrency)//will convert the currency name to the corresponding vertex from the currencylist
+{
+    for(int i=0;i<CurrencyListCounter;i++)//going through the array to figure out the index where the given currency is stored
+    {
+        if(strcmp(CurrencyList[i],inputcurrency)==0)//if currency found then return the index(which will also be our vertex)
+        return i;
+    }
+    return -1;//if not found then return -1
+}
+
+void PrintAllCurrencies()
+{
+    for(int i=0;i<CurrencyListCounter;i++)
+    {
+        printf("%s---->",CurrencyList[i]);
+    }
+    return;
+}
+
+
+
+
+
+
 
 void AddTradeBank(char* BankName){ // we use this function to open a new bank in the sense to creat a head structure
     if(NoOfTradeBanks == 0){
@@ -59,28 +94,28 @@ void AddCurrencyExchange(char* BankName,char* Currency1 , char* Currency2 , int 
 
 }
 
-void UpdateConversionRate(char* BankName, char* Currency1, char* Currency2, int ConversionRate)
-{
-    PtrToGraphNode temp;
+// void UpdateConversionRate(char* BankName, char* Currency1, char* Currency2, int ConversionRate)
+// {
+//     PtrToGraphNode temp;
 
-    //update commission for conversion from currency 1 to currency 2
-    temp = BankName->CurrencyGraph->GraphList[currency1_id];
+//     //update commission for conversion from currency 1 to currency 2
+//     temp = BankName->CurrencyGraph->GraphList[currency1_id];
 
-    while(temp != NULL && temp->VertexID != currency2_id) {
-        temp = temp->next;
-    }
-    if (temp)
-        temp->weight = commission;
+//     while(temp != NULL && temp->VertexID != currency2_id) {
+//         temp = temp->next;
+//     }
+//     if (temp)
+//         temp->weight = commission;
 
-    //update commission for conversion from currency 2 to currency 1
-    temp = BankName->CurrencyGraph->GraphList[currency2_id];
+//     //update commission for conversion from currency 2 to currency 1
+//     temp = BankName->CurrencyGraph->GraphList[currency2_id];
 
-    while(temp != NULL && temp->VertexID != currency1_id) {
-        temp = temp->next;
-    }
-    if (temp)
-        temp->weight = commission;
+//     while(temp != NULL && temp->VertexID != currency1_id) {
+//         temp = temp->next;
+//     }
+//     if (temp)
+//         temp->weight = commission;
 
-    return;
-}
+//     return;
+// }
 

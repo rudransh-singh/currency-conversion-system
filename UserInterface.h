@@ -11,6 +11,9 @@
 4. The best path of converting from currency A to B along with it's cost and the chosen Trade Bank.You can only choose a single Trade Bank for all the exchanges regarding this query.
 */
 
+
+
+
 void AddTradeBank(char* BankName);// Parth Anish
 
 void AddCurrencyExchange(char* BankName,char* Currency1 , char* Currency2 , int ConversionRate); // Parth nd Anish
@@ -22,6 +25,7 @@ void DeleteCurrency(char* BankName,char* CurrencyName); // RP
 // void UpdateCommission(char* BankName,char* Currency1 , char* Curreny2, int commission); // Vikram
 
 void UpdateCurrencyExchange(char* BankName, char* Currency1, char* Currency2, int ConversionRate); // Vikram
-
-
+void AddCurrencyToGlobalList(char* inputcurrency);
+int LookupCurrencyVertex(char* inputcurrency);
+void PrintAllCurrencies();
 #endif

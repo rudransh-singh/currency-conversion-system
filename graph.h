@@ -1,13 +1,7 @@
 #ifndef GRAPH__H
 #define GRAPH__H
-typedef struct Tradebank Tradebank;//typdefing structures
-typedef Tradebank* PtrToTradebank;//typedefing pointers to tradebank
 
-struct Tradebank{
-    char NameOfTradeBank[100];//Stores the name of the trade bank
-    PtrToTradebank next;
-    // add graph details later
-};
+
 
 typedef struct currency currency;
 typedef struct currency* PtrToCurrency;
@@ -46,6 +40,18 @@ struct dijkstra{
    
     int* prev;  //contains the node previous to the end node for the shortest code, will be used to figure out the path
 };//this is what we will have to return from the dijkstra function at the end
+
+typedef struct Tradebank Tradebank;//typdefing structures
+typedef Tradebank* PtrToTradebank;//typedefing pointers to tradebank
+struct Tradebank{
+    char NameOfTradeBank[100];//Stores the name of the trade bank
+    PtrToTradebank next;
+    PtrToGraphList G;
+    int currentcurrencynumber;//contains the number of currencies currently supported by the tradebank
+    char AvailableCurrencies[1000][100];//will contain the list of all available currencies
+
+    // add graph details later
+};
 
 PtrToGraphList CreateGraph(int NumberOfVertices);//This function will create a graph with the given number of vertices, for our case it will be 1e3
 void InsertEdge(PtrToGraphList G,int source,int destination,int weight);//this function will add an edge to the graphlist from the source vertex to the destination vertex with a given weight
