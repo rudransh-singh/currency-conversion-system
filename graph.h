@@ -76,7 +76,7 @@ PtrToCurrencyNode CreateEmptyCurrList();
 int searchforcurrency(char *inputcurrency, PtrToCurrencyNode C);//searches for the currency in the given linkedlist
 void addcurrency(char *inputcurrency, int vertexid,PtrToCurrencyNode C);//adds a currency to the given linked list
 void deletecurrency(char *inputcurrency, PtrToCurrencyNode C);//deletes the given currency from the linked list
-
+void DeleteCurrList(PtrToCurrencyNode C);
 void printcurrencylist(PtrToCurrencyNode C);//just a utility/testing function to check whether the linked list works
 
 //functions for the tradebank
@@ -87,7 +87,7 @@ void printcurrencylist(PtrToCurrencyNode C);//just a utility/testing function to
 
 
 
-
+void DeleteGraph(PtrToGraphList G);//deletes the entire graph struct;
 PtrToGraphList CreateGraph(int NumberOfVertices);//This function will create a graph with the given number of vertices, for our case it will be 1e3
 void InsertEdge(PtrToGraphList G,int source,int destination,int weight);//this function will add an edge to the graphlist from the source vertex to the destination vertex with a given weight
 void PrintGraph(PtrToGraphList G);//just some utility function to print the graph to see whether it is working or not

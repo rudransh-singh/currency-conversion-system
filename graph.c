@@ -41,6 +41,7 @@ void InsertEdge(PtrToGraphList G,int source,int destination,int inputweight)//th
      temp->weight=inputweight;//these three lines create the temp node and then set its ID and weight
      temp->next=G->GraphVertexArray[source];
      G->GraphVertexArray[source]=temp;//standard code for inserting a node to the front of the linked list   
+     return;
  }
  for(;temp;temp=temp->next)//traversing through the list of the source vertex to check whether the edge already exists
  {
@@ -129,4 +130,24 @@ dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
     free(PQ);
     free(PQ->Harr);
     return answer;
+}
+void DeleteGraph(PtrToGraphList G)
+{
+
+    for (int i = 0; i < G->NumberOfVertices; i++)
+    {
+        PtrToGraphNode temp;
+        if (G->GraphVertexArray[i] == NULL)
+            continue;
+        while (G->GraphVertexArray[i]->next != NULL)
+        {
+            temp = G->GraphVertexArray[i];
+            G->GraphVertexArray[i] = G->GraphVertexArray[i]->next;
+            free(temp);
+        }
+        free(G->GraphVertexArray[i]);
+        G->GraphVertexArray[i] = NULL;
+    }
+    free(G->GraphVertexArray);
+    free(G);
 }

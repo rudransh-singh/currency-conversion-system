@@ -46,6 +46,7 @@ PtrToCurrencyNode CreateEmptyCurrList()//creates a dummy node and returns it's v
     t=(PtrToCurrencyNode)(malloc)(sizeof(currencynode));
     strcpy(t->NameOfCurrency,"undefined");
     t->Vertexid=-1;
+    t->next=NULL;
     return t;
 }
 int searchforcurrency(char *inputcurrency, PtrToCurrencyNode C)//search for the input currency in the given currency linked list
@@ -81,6 +82,8 @@ void addcurrency(char *inputcurrency,int vertexid ,PtrToCurrencyNode c)//add the
         return;
     }
     //first search for the currency in the given linked list
+    else
+    {
     int search=searchforcurrency(inputcurrency,c);//searches for the currency in the linked list
     if(search!=-1)
     {
@@ -95,6 +98,7 @@ void addcurrency(char *inputcurrency,int vertexid ,PtrToCurrencyNode c)//add the
         temp->Vertexid=vertexid;
         temp->next=c->next;
         c->next=temp;//inserting the node to the front of the linked list
+    }
     }
 }
 
@@ -144,7 +148,25 @@ void printcurrencylist(PtrToCurrencyNode C)
     return;
 }
 
-
+void DeleteCurrList(PtrToCurrencyNode C)
+{
+        PtrToCurrencyNode temp;
+        if (C->next == NULL)
+        {
+            free(C);
+            return;
+        }
+        while (C->next->next != NULL)
+        {
+            temp = C->next;
+            C->next = C->next->next;
+            free(temp);
+        }
+        free(C->next);
+        C->next = NULL;
+        free(C);
+        return;
+}
 
 
 void AddTradeBank(char* BankName){ // we use this function to open a new bank in the sense to creat a head structure
