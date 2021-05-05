@@ -4,18 +4,21 @@
 #include <stdlib.h>
 #include "UserInterface.c"
 int main()
-{   
-    // while(1){
-    // printf("Enter Bank Name ->");
-    // char BankName[50];
-    // scanf("%s",BankName);
-    // AddTradeBank(BankName);
-    // if(strcmp(BankName,"quit") == 0)break;
-    // }
-    // while(Head!=NULL){
-    //     printf("%s ",Head->NameOfTradeBank);
-    //     Head = Head->next;
-    // }
+{
+    while (1)
+    {
+        printf("Enter Bank Name ->");
+        char BankName[50];
+        scanf("%s", BankName);
+        if (strcmp(BankName, "quit") == 0)
+            break;
+        AddTradeBank(BankName);
+    }
+    while (Head != NULL)
+    {
+        printf("%s ", Head->NameOfTradeBank); //dont move head
+        Head = Head->next;
+    }
     //checking whether Graphlist works
     // PtrToGraphList G=NULL;
     // G=CreateGraph(10);
@@ -35,7 +38,7 @@ int main()
     // PrintGraph(G);
 
     //Checking whether Heap works
-/*
+    /*
     PtrToMinHeap H=NULL;
     H=CreateHeap(11); //CreateMinHeap of size 11
     InsertMinHeapKeyValue(H,1,3);
@@ -73,5 +76,4 @@ int main()
     printf("min-keyvalue pair for H is \n Key=%d and value= %d \n",t.key,t.value);
     printf("min-keyvalue pair for H is \n Key=%d and value= %d \n",GetMin(H).key,GetMin(H).value);
 */
-
 }
