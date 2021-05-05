@@ -174,12 +174,13 @@ void DeleteVertex(PtrToGraphList G, int vertex)
             {
                 tempgraphnode=G->GraphVertexArray[i]->next;
                 prevgraphnode=G->GraphVertexArray[i];
-                for(;tempgraphnode;tempgraphnode=tempgraphnode->next)
+                for(;tempgraphnode;tempgraphnode=tempgraphnode->next,prevgraphnode=prevgraphnode->next)
                 {
                     if(tempgraphnode->VertexID==vertex)
                     {
                         prevgraphnode->next=tempgraphnode->next;
                         free(tempgraphnode);
+                        break;
                     }
                 }
             }
