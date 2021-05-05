@@ -151,3 +151,50 @@ void DeleteGraph(PtrToGraphList G)
     free(G->GraphVertexArray);
     free(G);
 }
+void DeleteVertex(PtrToGraphList G, int vertex)
+{
+    PtrToGraphNode tempgraphnode;//temporary node 
+    PtrToGraphNode prevgraphnode;//pointer to previous node
+    for(int i=0;i<G->NumberOfVertices;i++)
+    {
+        if(i==vertex)
+        continue;
+        else
+        {
+            tempgraphnode=G->GraphVertexArray[i];
+            if(tempgraphnode==NULL)
+            continue;
+            if(tempgraphnode->VertexID==vertex)
+            {
+                free(tempgraphnode);
+                G->GraphVertexArray[i]=NULL;
+                continue;
+            }
+            else
+            {
+                tempgraphnode=G->GraphVertexArray[i]->next;
+                prevgraphnode=G->GraphVertexArray[i];
+                for(;tempgraphnode;tempgraphnode=tempgraphnode->next)
+                {
+                    if(tempgraphnode->VertexID==vertex)
+                    {
+                        prevgraphnode->next=tempgraphnode->next;
+                        free(tempgraphnode);
+                    }
+                }
+            }
+
+        }
+    }
+    PtrToGraphNode temp;
+    if (G->GraphVertexArray[vertex] == NULL)
+        return;
+    while (G->GraphVertexArray[vertex]->next != NULL)
+    {
+        temp = G->GraphVertexArray[vertex];
+        G->GraphVertexArray[vertex] = G->GraphVertexArray[vertex]->next;
+        free(temp);
+    }
+    free(G->GraphVertexArray[vertex]);
+    G->GraphVertexArray[vertex] = NULL;
+}

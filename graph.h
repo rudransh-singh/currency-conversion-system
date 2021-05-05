@@ -37,6 +37,7 @@ struct dijkstra{
 };//this is what we will have to return from the dijkstra function at the end
 
 
+void DeleteVertex(PtrToGraphList G, int vertex);
 
 
 typedef struct currencynode currencynode;
