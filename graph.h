@@ -1,13 +1,8 @@
-#ifndef GRAPH__H
-#define GRAPH__H
+#ifndef GRAPH__HH
+#define GRAPH__HH
 
 //now defining a linklist for Currencies in a particular Tradebank
 //This will only be used when we want to check whether a particular currency exists for a node or not
-
-
-
-
-
 
 
 //now we add info on graph nodes
@@ -61,10 +56,6 @@ struct Tradebank{
     PtrToCurrencyNode CurrencyHead;//Head of the linked list
     // add graph details later
 };
-
-
-
-
 
 
 //functions for currency linked list 
