@@ -169,11 +169,20 @@ void DeleteCurrList(PtrToCurrencyNode C)
 }
 
 
-void AddTradeBank(char* BankName){ // we use this function to open a new bank in the sense to creat a head structure
-    if(NoOfTradeBanks == 0){
-        ListofTradeBank = (PtrToTradebank)malloc(sizeof(Tradebank));
-        
-        strcpy(ListofTradeBank->NameOfTradeBank,BankName);
+void AddTradeBank(char *BankName)
+{ // we use this function to open a new bank in the sense to creat a head structure
+    if (NoOfTradeBanks == 0)
+    {
+        ListofTradeBank = (PtrToTradebank) malloc(sizeof(Tradebank));
+
+        strcpy(ListofTradeBank->NameOfTradeBank, BankName);
+        ListofTradeBank->G = CreateGraph(1000);
+        ListofTradeBank->CurrencyHead = (PtrToCurrencyNode)malloc(sizeof(currencynode));
+        ListofTradeBank->CurrencyHead->Vertexid = -1;
+        ListofTradeBank->CurrencyHead->next = NULL;
+
+        for (int i = 0; i < 1000; i++)
+            ListofTradeBank->availablevertices[i] = 0; //initialises currency array to 0
 
         Tail = ListofTradeBank;
         Head = ListofTradeBank;
@@ -181,29 +190,43 @@ void AddTradeBank(char* BankName){ // we use this function to open a new bank in
         Tail->next = NULL;
         NoOfTradeBanks++;
     }
-    else{
+    else
+    {
 
-    PtrToTradebank Traverse = Head; // We check if the bank exists or not
-    bool BankExists = true;
-    while(Traverse != NULL && BankExists){
-        if(strcmp(Traverse->NameOfTradeBank,BankName) == 0)BankExists = false;
-        Traverse = Traverse->next;
+        PtrToTradebank Traverse = Head; // We check if the bank exists or not
+        bool BankExists = true;
+        while (Traverse != NULL && BankExists)
+        {
+            if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
+            {
+                BankExists = false;
+                break;
+            }
+            Traverse = Traverse->next;
+        }
+
+        if (BankExists)
+        {
+            Tradebank *NewBank = (Tradebank *)malloc(sizeof(Tradebank));
+
+            strcpy(NewBank->NameOfTradeBank, BankName); //Storing bank name in the node created
+
+            NewBank->G = CreateGraph(1000);
+            NewBank->CurrencyHead = (PtrToCurrencyNode)malloc(sizeof(currencynode));
+            NewBank->CurrencyHead->Vertexid = -1;
+            NewBank->CurrencyHead->next = NULL;
+
+            for (int i = 0; i < 1000; i++)
+                NewBank->availablevertices[i] = 0; //initialises currency array to 0
+
+            Tail->next = NewBank; // adding the node to end
+            Tail = NewBank;       // updating the tail
+
+            Tail->next = NULL;
+            NoOfTradeBanks++;
+        }
     }
-
-    if(BankExists){    
-    Tradebank* NewBank = (Tradebank*)malloc(sizeof(Tradebank));
-    
-    strcpy(NewBank->NameOfTradeBank,BankName); //Storing bank name in the node created
-
-    Tail->next = NewBank;// adding the node to end
-    Tail = NewBank;     // updating the tail
-
-    Tail->next = NULL;
-    NoOfTradeBanks++;
-    }
- }
-}//we have to figure out how to create a new trade bank with variable name given to us by user
-
+}
 
 void AddCurrencyExchange(char* BankName,char* Currency1 , char* Currency2 , int ConversionRate){
     // char TradeBankName[50], Currency1[50],Currency2[50];

@@ -49,10 +49,6 @@ struct currencynode{
     PtrToCurrencyNode next;//pointer to next node
 };
  
-
-
-
-
 typedef struct Tradebank Tradebank;//typdefing structures
 typedef Tradebank* PtrToTradebank;//typedefing pointers to tradebank
 struct Tradebank{
