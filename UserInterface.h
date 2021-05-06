@@ -23,6 +23,7 @@ void DeleteTradeBank(char* BankName);//Rohan
 void DeleteCurrency(char* BankName,char* CurrencyName); // RP
  
 // void UpdateCommission(char* BankName,char* Currency1 , char* Curreny2, int commission); // Vikram
+void RemoveCurrencyExchange(char* BankName, char* source, char* dest);
 
 void UpdateCurrencyExchange(char* BankName, char* Currency1, char* Currency2, int ConversionRate); // Vikram
 void AddCurrencyToGlobalList(char* inputcurrency);

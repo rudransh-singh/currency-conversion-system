@@ -370,6 +370,70 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
     }
 }
 
+void RemoveCurrencyExchange(char* BankName, char* source, char* dest)
+{
+    PtrToTradebank temp = Head;
+
+    //check if Tradebank exists in linked list
+    while (temp != NULL && strcmp(temp->NameOfTradeBank, BankName) != 0) {
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Bank does not exist! \n\n");
+        return;
+    }
+
+    PtrToGraphList CurrGraph = temp->G;
+    PtrToGraphNode* CurrGraphArray = CurrGraph->GraphVertexArray;
+    
+    PtrToGraphNode curr, prev;
+    int source_idx, dest_idx;
+
+    //check if source and dest currencies exist in the linked list of the Tradebank
+    source_idx = searchforcurrency(source, temp->CurrencyHead);
+    dest_idx = searchforcurrency(dest, temp->CurrencyHead);
+
+    if (source_idx == -1) {
+        printf("%s does not exist in this Tradebank! \n\n", source);
+        return;
+    }
+    if (dest_idx == -1) {
+        printf("%s does not exist in this Tradebank! \n\n", dest);
+        return;
+    }
+    
+    //check for edge between source_idx and dest_idx in adjacency list 
+    curr = CurrGraphArray[source_idx]->next;
+    prev = CurrGraphArray[source_idx];
+
+    while (curr != NULL && curr->VertexID != dest_idx) {
+        curr = curr->next;
+        prev = prev->next;
+    }
+
+    if (curr != NULL) {
+        prev->next = curr->next;
+        free(curr);
+    }
+
+    //check for edge between dest_idx and source_idx in adjacency list   
+    curr = CurrGraphArray[dest_idx]->next;
+    prev = CurrGraphArray[dest_idx];
+
+    while (curr != NULL && curr->VertexID != source_idx) {
+        curr = curr->next;
+        prev = prev->next;
+    }
+
+    if (curr != NULL) {
+        prev->next = curr->next;
+        free(curr);
+    }
+
+    return;
+}
+
 // void UpdateConversionRate(char* BankName, char* Currency1, char* Currency2, int ConversionRate)
 // {
 //     PtrToGraphNode temp;
