@@ -274,7 +274,7 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
 
             if (Traverse->CurrencyHead->Vertexid == -1) // no currency added to the currency list of the selected trade bank yet
             {
-               
+
                 Traverse->CurrencyHead->Vertexid = id1;
                 strcpy(Traverse->CurrencyHead->NameOfCurrency, Currency1);
 
@@ -293,8 +293,9 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
                 PtrToCurrencyNode NewCurrency1 = (PtrToCurrencyNode)malloc(sizeof(currencynode));
                 PtrToCurrencyNode NewCurrency2 = (PtrToCurrencyNode)malloc(sizeof(currencynode));
 
-                while(Traverse->CurrencyHead->next!=NULL)Traverse->CurrencyHead = Traverse->CurrencyHead->next; // so that we reach end of currency list
-          
+                while (Traverse->CurrencyHead->next != NULL)
+                    Traverse->CurrencyHead = Traverse->CurrencyHead->next; // so that we reach end of currency list
+
                 NewCurrency1->Vertexid = id1;
                 NewCurrency1->next = NULL;
                 Traverse->CurrencyHead->next = NewCurrency1;
@@ -316,15 +317,17 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
         {
             int id1 = 0, id2 = 0;
             PtrToTradebank Duplicate = Traverse;
-            while (strcmp(Currency1,Duplicate->CurrencyHead->NameOfCurrency)!=0){
+            while (strcmp(Currency1, Duplicate->CurrencyHead->NameOfCurrency) != 0)
+            {
                 Duplicate->CurrencyHead = Duplicate->CurrencyHead->next;
             }
             id1 = Duplicate->CurrencyHead->Vertexid;
 
-            while (Traverse->availablevertices[id2] != 0)id2++;
+            while (Traverse->availablevertices[id2] != 0)
+                id2++;
 
             Traverse->availablevertices[id2] = 1;
-          
+
             PtrToCurrencyNode NewCurrency2 = (PtrToCurrencyNode)malloc(sizeof(currencynode));
 
             NewCurrency2->Vertexid = id2;
@@ -340,53 +343,58 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
         {
             int id1 = 0, id2 = 0;
             PtrToTradebank Duplicate = Traverse;
-            while (strcmp(Currency2,Duplicate->CurrencyHead->NameOfCurrency)!=0){
+            while (strcmp(Currency2, Duplicate->CurrencyHead->NameOfCurrency) != 0)
+            {
                 Duplicate->CurrencyHead = Duplicate->CurrencyHead->next;
             }
             id2 = Duplicate->CurrencyHead->Vertexid;
 
-            while (Traverse->availablevertices[id1] != 0)id1++;
+            while (Traverse->availablevertices[id1] != 0)
+                id1++;
 
             Traverse->availablevertices[id1] = 1;
 
-            while(Traverse->CurrencyHead->next!=NULL)Traverse->CurrencyHead = Traverse->CurrencyHead->next; // so that we reach end of currency list
-          
+            while (Traverse->CurrencyHead->next != NULL)
+                Traverse->CurrencyHead = Traverse->CurrencyHead->next; // so that we reach end of currency list
+
             PtrToCurrencyNode NewCurrency1 = (PtrToCurrencyNode)malloc(sizeof(currencynode));
 
             NewCurrency1->Vertexid = id1;
             NewCurrency1->next = NULL;
             strcpy(NewCurrency1->NameOfCurrency, Currency1);
-            Traverse->CurrencyHead->next = NewCurrency1;        // added latest currency at the end of the currency list
+            Traverse->CurrencyHead->next = NewCurrency1; // added latest currency at the end of the currency list
 
             InsertEdge(Traverse->G, id1, id2, ConversionRate);
 
             printf("CURR 1 DOESNT EXIST CURR 2 DOES\n");
         }
-
     }
-    else{
+    else
+    {
         printf("The Bank Does not Exist.\n");
         return;
     }
 }
 
-void RemoveCurrencyExchange(char* BankName, char* source, char* dest)
+void RemoveCurrencyExchange(char *BankName, char *source, char *dest)
 {
     PtrToTradebank temp = Head;
 
     //check if Tradebank exists in linked list
-    while (temp != NULL && strcmp(temp->NameOfTradeBank, BankName) != 0) {
+    while (temp != NULL && strcmp(temp->NameOfTradeBank, BankName) != 0)
+    {
         temp = temp->next;
     }
 
-    if (temp == NULL) {
+    if (temp == NULL)
+    {
         printf("Bank does not exist! \n\n");
         return;
     }
 
     PtrToGraphList CurrGraph = temp->G;
-    PtrToGraphNode* CurrGraphArray = CurrGraph->GraphVertexArray;
-    
+    PtrToGraphNode *CurrGraphArray = CurrGraph->GraphVertexArray;
+
     PtrToGraphNode curr, prev;
     int source_idx, dest_idx;
 
@@ -394,39 +402,45 @@ void RemoveCurrencyExchange(char* BankName, char* source, char* dest)
     source_idx = searchforcurrency(source, temp->CurrencyHead);
     dest_idx = searchforcurrency(dest, temp->CurrencyHead);
 
-    if (source_idx == -1) {
+    if (source_idx == -1)
+    {
         printf("%s does not exist in this Tradebank! \n\n", source);
         return;
     }
-    if (dest_idx == -1) {
+    if (dest_idx == -1)
+    {
         printf("%s does not exist in this Tradebank! \n\n", dest);
         return;
     }
-    
-    //check for edge between source_idx and dest_idx in adjacency list 
+
+    //check for edge between source_idx and dest_idx in adjacency list
     curr = CurrGraphArray[source_idx]->next;
     prev = CurrGraphArray[source_idx];
 
-    while (curr != NULL && curr->VertexID != dest_idx) {
+    while (curr != NULL && curr->VertexID != dest_idx)
+    {
         curr = curr->next;
         prev = prev->next;
     }
 
-    if (curr != NULL) {
+    if (curr != NULL)
+    {
         prev->next = curr->next;
         free(curr);
     }
 
-    //check for edge between dest_idx and source_idx in adjacency list   
+    //check for edge between dest_idx and source_idx in adjacency list
     curr = CurrGraphArray[dest_idx]->next;
     prev = CurrGraphArray[dest_idx];
 
-    while (curr != NULL && curr->VertexID != source_idx) {
+    while (curr != NULL && curr->VertexID != source_idx)
+    {
         curr = curr->next;
         prev = prev->next;
     }
 
-    if (curr != NULL) {
+    if (curr != NULL)
+    {
         prev->next = curr->next;
         free(curr);
     }
