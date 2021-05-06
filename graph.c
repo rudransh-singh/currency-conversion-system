@@ -198,3 +198,24 @@ void DeleteVertex(PtrToGraphList G, int vertex)
     free(G->GraphVertexArray[vertex]);
     G->GraphVertexArray[vertex] = NULL;
 }
+
+
+int EdgeExists(PtrToGraphList G, int source, int dest)
+{
+    int found = 0;                      //In case there already exists an edge between source to destination this flag will change to 1
+    PtrToGraphNode temp;                //making a temporary NodePtr which will be inserted later
+    temp = G->GraphVertexArray[source]; //go to the source vertex of the array
+    if (temp == NULL)
+    {
+        return 0;
+    }
+    for (; temp; temp = temp->next) //traversing through the list of the source vertex to check whether the edge already exists
+    {
+        int checker = temp->VertexID; //stores the vertex ID of the node being traversed right now
+        if (checker == dest)
+        {
+            found = 1;
+        }
+    }
+    return found;
+}

@@ -18,7 +18,6 @@ int main()
     PtrToCurrencyNode c=NULL;
     c=CreateEmptyCurrList();
     addcurrency("rupee",0,c);
-   
     // assert(c->next==NULL);
     // searchforcurrency("Dollar",c);
     // // printcurrencylist(c);

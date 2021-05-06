@@ -26,16 +26,24 @@ int main()
     char string4[50] = "HDFC";
 
     AddTradeBank(string1);
-   
+    AddTradeBank("HDFC");
+   AddCurrencyToTradeBank("SBI","rupee");
+//    AddCurrencyToTradeBank("SBi","rupee");
+   AddCurrencyToTradeBank("SBI","dollar");
+   AddCurrencyToTradeBank("SBI","yen");
     // AddTradeBank(string2);
     // AddTradeBank(string3);
     // AddTradeBank(string4);
-    AddCurrencyExchange("SBI","rupee","dollar",5);
-    AddCurrencyExchange("SBI","dollar","dirham",5);
-    AddCurrencyExchange("SBI","dirham","rupee",5);
-    AddCurrencyExchange("SBI","rupee","euros",5);
-    AddCurrencyExchange("SBI","euros","dollar",5);
-    AddCurrencyExchange("SBI","rupee","yen",5);
+     AddCurrencyExchange1("SBI","rupee","dollar",5);
+     AddCurrencyExchange1("SBI","dollar","yen",10);
+    // AddCurrencyExchange("SBI","dollar","dirham",5);
+    // AddCurrencyExchange("SBI","dirham","rupee",5);
+    // AddCurrencyExchange("SBI","rupee","euros",5);
+    // AddCurrencyExchange("SBI","euros","dollar",5);
+    // AddCurrencyExchange("SBI","rupee","yen",5);
+    RemoveTradeBank("SBI");
+    // RemoveTradeBank("HDFC");
+    
     PrintTradeBankList2();
     // printf("\n---------------\n");
     // RemoveTradeBank(string2);

@@ -23,6 +23,10 @@ void RemoveCurrencyExchange(char* BankName, char* source, char* dest); //deletes
 void RemoveTradeBank(char* BankName);
 void PrintTradeBankList();
 void PrintTradeBankList2();
+void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int ConversionRate);
+void AddCurrencyToTradeBank(char *Bankname,char *inputcurrency);
+void PrintTradeBankGraph(PtrToTradebank T);
+
 
 
 // void AddTradeBank(char* BankName);// Parth Anish
