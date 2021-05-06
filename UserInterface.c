@@ -494,6 +494,29 @@ void PrintTradeBankList()
         temp = temp->next;
     }
 }
+
+
+void PrintTradeBankList2()
+{
+    PtrToTradebank temp;
+    temp = Head;
+    while (temp != NULL)
+    {
+        printf("Name of TradeBank->%s\n", temp->NameOfTradeBank);
+        printf("Currencies supported by the Tradebank are \n");
+        PtrToCurrencyNode tc=temp->CurrencyHead;
+        for(;tc;tc=tc->next)
+        {
+            printf("%s\n",tc->NameOfCurrency);
+        }
+        temp = temp->next;
+    }
+}
+
+
+
+
+
 // void UpdateConversionRate(char* BankName, char* Currency1, char* Currency2, int ConversionRate)
 // {
 //     PtrToGraphNode temp;

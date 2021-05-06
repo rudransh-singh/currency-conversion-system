@@ -22,7 +22,7 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
 void RemoveCurrencyExchange(char* BankName, char* source, char* dest); //deletes an edge in the currency graph of a Tradebank
 void RemoveTradeBank(char* BankName);
 void PrintTradeBankList();
-
+void PrintTradeBankList2();
 
 
 // void AddTradeBank(char* BankName);// Parth Anish

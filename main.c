@@ -26,23 +26,30 @@ int main()
     char string4[50] = "HDFC";
 
     AddTradeBank(string1);
-    AddTradeBank(string2);
-    AddTradeBank(string3);
-    AddTradeBank(string4);
+   
+    // AddTradeBank(string2);
+    // AddTradeBank(string3);
+    // AddTradeBank(string4);
+    AddCurrencyExchange("SBI","rupee","dollar",5);
+    AddCurrencyExchange("SBI","dollar","dirham",5);
+    AddCurrencyExchange("SBI","dirham","rupee",5);
+    AddCurrencyExchange("SBI","rupee","euros",5);
+    AddCurrencyExchange("SBI","euros","dollar",5);
+    AddCurrencyExchange("SBI","rupee","yen",5);
+    PrintTradeBankList2();
+    // printf("\n---------------\n");
+    // RemoveTradeBank(string2);
+    // PrintTradeBankList2();
+    //     printf("\n---------------\n");
 
-    PrintTradeBankList();
+    // RemoveTradeBank(string1);
 
-    RemoveTradeBank(string2);
+    // PrintTradeBankList2();
+    //    printf("\n---------------\n");
 
-    PrintTradeBankList();
+    // RemoveTradeBank(string4);
 
-    RemoveTradeBank(string1);
-
-    PrintTradeBankList();
-
-    RemoveTradeBank(string4);
-
-    PrintTradeBankList();
+    // PrintTradeBankList2();
 
     //checking whether Graphlist works
     // PtrToGraphList G=NULL;
