@@ -20,6 +20,8 @@ void DeleteCurrList(PtrToCurrencyNode C); //frees pointers in the currency list
 void AddTradeBank(char *BankName); //adds a new Tradebank to the linked list
 void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int ConversionRate); //adds an edge in the currency graph of a Tradebank
 void RemoveCurrencyExchange(char* BankName, char* source, char* dest); //deletes an edge in the currency graph of a Tradebank
+void RemoveTradeBank(char* BankName);
+void PrintTradeBankList();
 
 
 

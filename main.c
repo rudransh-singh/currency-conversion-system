@@ -1,24 +1,49 @@
 #include "graph.h"
-#include "priorityqueue.c"
+#include "priorityqueue.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "UserInterface.c"
+#include "UserInterface.h"
+#include <string.h>
 int main()
 {
-    while (1)
-    {
-        printf("Enter Bank Name ->");
-        char BankName[50];
-        scanf("%s", BankName);
-        if (strcmp(BankName, "quit") == 0)
-            break;
-        AddTradeBank(BankName);
-    }
-    while (Head != NULL)
-    {
-        printf("%s ", Head->NameOfTradeBank); //dont move head
-        Head = Head->next;
-    }
+    // while (1)
+    // {
+    //     printf("Enter Bank Name ->");
+    //     char BankName[50];
+    //     scanf("%s", BankName);
+    //     if (strcmp(BankName, "quit") == 0)
+    //         break;
+    //     AddTradeBank(BankName);
+    // }
+    // while (Head != NULL)
+    // {
+    //     printf("%s ", Head->NameOfTradeBank); //dont move head
+    //     Head = Head->next;
+    // }
+    char string1[50] = "SBI";
+    char string2[50] = "JPMC";
+    char string3[50] = "BOB";
+    char string4[50] = "HDFC";
+
+    AddTradeBank(string1);
+    AddTradeBank(string2);
+    AddTradeBank(string3);
+    AddTradeBank(string4);
+
+    PrintTradeBankList();
+
+    RemoveTradeBank(string2);
+
+    PrintTradeBankList();
+
+    RemoveTradeBank(string1);
+
+    PrintTradeBankList();
+
+    RemoveTradeBank(string4);
+
+    PrintTradeBankList();
+
     //checking whether Graphlist works
     // PtrToGraphList G=NULL;
     // G=CreateGraph(10);

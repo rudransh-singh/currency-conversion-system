@@ -448,6 +448,52 @@ void RemoveCurrencyExchange(char *BankName, char *source, char *dest)
     return;
 }
 
+void RemoveTradeBank(char *BankName)
+{
+    PtrToTradebank current, previous, position;
+    current = Head->next;
+    previous = Head;
+    if (strcmp(Head->NameOfTradeBank, BankName) == 0)
+    {
+        position = Head;
+        Head = Head->next;
+    }
+    else
+    {
+        while (current != NULL)
+        {
+            if (strcmp(current->NameOfTradeBank, BankName) == 0)
+            {
+                break;
+            }
+            current = current->next;
+            previous = previous->next;
+        }
+        if (current == NULL)
+        {
+            printf("The Trade bank does not exist.\n");
+            return;
+        }
+        previous->next = current->next;
+        position = current;
+    }
+
+    DeleteCurrList(position->CurrencyHead);
+    DeleteGraph(position->G);
+    position->next = NULL;
+    free(position);
+}
+
+void PrintTradeBankList()
+{
+    PtrToTradebank temp;
+    temp = Head;
+    while (temp != NULL)
+    {
+        printf("%s\n", temp->NameOfTradeBank);
+        temp = temp->next;
+    }
+}
 // void UpdateConversionRate(char* BankName, char* Currency1, char* Currency2, int ConversionRate)
 // {
 //     PtrToGraphNode temp;
