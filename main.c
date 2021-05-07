@@ -36,15 +36,22 @@ int main()
     // AddTradeBank(string4);
      AddCurrencyExchange1("SBI","rupee","dollar",5);
      AddCurrencyExchange1("SBI","dollar","yen",10);
+     AddCurrencyExchange1("SBI","rupee","yen",7);
+     AddCurrencyToTradeBank("HDFC","rupee");
+     AddCurrencyToTradeBank("HDFC","yen");
+     AddCurrencyExchange1("HDFC","rupee","yen",4);
     // AddCurrencyExchange("SBI","dollar","dirham",5);
     // AddCurrencyExchange("SBI","dirham","rupee",5);
     // AddCurrencyExchange("SBI","rupee","euros",5);
     // AddCurrencyExchange("SBI","euros","dollar",5);
     // AddCurrencyExchange("SBI","rupee","yen",5);
-    RemoveTradeBank("SBI");
+    // RemoveTradeBank("SBI");
     // RemoveTradeBank("HDFC");
-    
+    // RemoveCurrencyExchange("SBI","rupee","yen");
     PrintTradeBankList2();
+    DijkstraBankInfo solution;
+    solution=DijkstraOnBankList("rupee","yen");
+    printf("%d %s",solution.mincost, solution.TradeBankName);
     // printf("\n---------------\n");
     // RemoveTradeBank(string2);
     // PrintTradeBankList2();

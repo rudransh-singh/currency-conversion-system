@@ -10,6 +10,17 @@
 3. Add or delete a currency conversion from a specied Trade Bank. (Conversion rate - Integer)
 4. The best path of converting from currency A to B along with it's cost and the chosen Trade Bank.You can only choose a single Trade Bank for all the exchanges regarding this query.
 */
+typedef struct DijkstraBankInfo DijkstraBankInfo;
+struct DijkstraBankInfo
+{
+    int mincost;
+    char TradeBankName[100];
+};
+
+
+
+
+
 
 PtrToCurrencyNode CreateEmptyCurrList(); //creates a dummy node and returns it's value
 int searchforcurrency(char *inputcurrency, PtrToCurrencyNode C); //search for the input currency in the given currency linked list
@@ -27,6 +38,7 @@ void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int 
 void AddCurrencyToTradeBank(char *Bankname,char *inputcurrency);
 void PrintTradeBankGraph(PtrToTradebank T);
 void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2); //this function removes a currency exchange from the currency graph, if it exists 
+DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency);
 
 
 

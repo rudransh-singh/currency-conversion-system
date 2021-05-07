@@ -112,7 +112,7 @@ dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
         tempgraphnode = G->GraphVertexArray[tempheapnode.key];
         if (tempgraphnode == NULL) //if the vertex has no neighbours then skip(control flow will definitely not reach here but still)
             continue;
-        for (; tempgraphnode->next; tempgraphnode = tempgraphnode->next) // traversing through the adjacency list of a particular index
+        for (; tempgraphnode; tempgraphnode = tempgraphnode->next) // traversing through the adjacency list of a particular index
         {
             if (vis[tempgraphnode->VertexID]) //if the node has already been visited(i.e smallest distance has been found) then skip
                 continue;
@@ -127,8 +127,9 @@ dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
             }
         }
     }
-    free(PQ);
     free(PQ->Harr);
+    free(PQ);
+    
     return answer;
 }
 void DeleteGraph(PtrToGraphList G)

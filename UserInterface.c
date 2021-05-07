@@ -1,6 +1,7 @@
 #include "graph.h"
 #include "UserInterface.h"
 #include "priorityqueue.h"
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -378,77 +379,77 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
     }
 }
 
-void RemoveCurrencyExchange(char *BankName, char *source, char *dest)
-{
-    PtrToTradebank temp = Head;
+// void RemoveCurrencyExchange(char *BankName, char *source, char *dest)
+// {
+//     PtrToTradebank temp = Head;
 
-    //check if Tradebank exists in linked list
-    while (temp != NULL && strcmp(temp->NameOfTradeBank, BankName) != 0)
-    {
-        temp = temp->next;
-    }
+//     //check if Tradebank exists in linked list
+//     while (temp != NULL && strcmp(temp->NameOfTradeBank, BankName) != 0)
+//     {
+//         temp = temp->next;
+//     }
 
-    if (temp == NULL)
-    {
-        printf("Bank does not exist! \n\n");
-        return;
-    }
+//     if (temp == NULL)
+//     {
+//         printf("Bank does not exist! \n\n");
+//         return;
+//     }
 
-    PtrToGraphList CurrGraph = temp->G;
-    PtrToGraphNode *CurrGraphArray = CurrGraph->GraphVertexArray;
+//     PtrToGraphList CurrGraph = temp->G;
+//     PtrToGraphNode *CurrGraphArray = CurrGraph->GraphVertexArray;
 
-    PtrToGraphNode curr, prev;
-    int source_idx, dest_idx;
+//     PtrToGraphNode curr, prev;
+//     int source_idx, dest_idx;
 
-    //check if source and dest currencies exist in the linked list of the Tradebank
-    source_idx = searchforcurrency(source, temp->CurrencyHead);
-    dest_idx = searchforcurrency(dest, temp->CurrencyHead);
+//     //check if source and dest currencies exist in the linked list of the Tradebank
+//     source_idx = searchforcurrency(source, temp->CurrencyHead);
+//     dest_idx = searchforcurrency(dest, temp->CurrencyHead);
 
-    if (source_idx == -1)
-    {
-        printf("%s does not exist in this Tradebank! \n\n", source);
-        return;
-    }
-    if (dest_idx == -1)
-    {
-        printf("%s does not exist in this Tradebank! \n\n", dest);
-        return;
-    }
+//     if (source_idx == -1)
+//     {
+//         printf("%s does not exist in this Tradebank! \n\n", source);
+//         return;
+//     }
+//     if (dest_idx == -1)
+//     {
+//         printf("%s does not exist in this Tradebank! \n\n", dest);
+//         return;
+//     }
 
-    //check for edge between source_idx and dest_idx in adjacency list
-    curr = CurrGraphArray[source_idx]->next;
-    prev = CurrGraphArray[source_idx];
+//     //check for edge between source_idx and dest_idx in adjacency list
+//     curr = CurrGraphArray[source_idx]->next;
+//     prev = CurrGraphArray[source_idx];
 
-    while (curr != NULL && curr->VertexID != dest_idx)
-    {
-        curr = curr->next;
-        prev = prev->next;
-    }
+//     while (curr != NULL && curr->VertexID != dest_idx)
+//     {
+//         curr = curr->next;
+//         prev = prev->next;
+//     }
 
-    if (curr != NULL)
-    {
-        prev->next = curr->next;
-        free(curr);
-    }
+//     if (curr != NULL)
+//     {
+//         prev->next = curr->next;
+//         free(curr);
+//     }
 
-    //check for edge between dest_idx and source_idx in adjacency list
-    curr = CurrGraphArray[dest_idx]->next;
-    prev = CurrGraphArray[dest_idx];
+//     //check for edge between dest_idx and source_idx in adjacency list
+//     curr = CurrGraphArray[dest_idx]->next;
+//     prev = CurrGraphArray[dest_idx];
 
-    while (curr != NULL && curr->VertexID != source_idx)
-    {
-        curr = curr->next;
-        prev = prev->next;
-    }
+//     while (curr != NULL && curr->VertexID != source_idx)
+//     {
+//         curr = curr->next;
+//         prev = prev->next;
+//     }
 
-    if (curr != NULL)
-    {
-        prev->next = curr->next;
-        free(curr);
-    }
+//     if (curr != NULL)
+//     {
+//         prev->next = curr->next;
+//         free(curr);
+//     }
 
-    return;
-}
+//     return;
+// }
 
 void RemoveTradeBank(char *BankName)
 {
@@ -506,7 +507,7 @@ void PrintTradeBankList2()
     {
         printf("Name of TradeBank->%s\n", temp->NameOfTradeBank);
         printf("Currencies supported by the Tradebank are \n");
-        PtrToCurrencyNode tc=temp->CurrencyHead;
+        PtrToCurrencyNode tc=temp->CurrencyHead->next;
         for(;tc;tc=tc->next)
         {
             printf("%s\n",tc->NameOfCurrency);
@@ -761,4 +762,30 @@ void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2)
         printf("The Bank Does not Exist.\n");
         return;
     }
+}
+DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency)
+{
+    DijkstraBankInfo solution;
+    PtrToTradebank t=Head; 
+    solution.mincost=INT_MAX;
+    for(;t;t=t->next)
+    {
+        int sourceid=searchforcurrency(sourcecurrency,t->CurrencyHead);
+        int destid=searchforcurrency(destcurrency,t->CurrencyHead);
+        if(sourceid!=-1&&destid!=-1)
+        {
+            dijkstra answer;
+            answer=dijkstraalgo(t->G,10,sourceid);
+            if(answer.dist[destid]<solution.mincost)
+            {
+                solution.mincost=answer.dist[destid];
+                strcpy(solution.TradeBankName,t->NameOfTradeBank);
+            }
+        }
+        else
+        {
+            continue;
+        }
+    }
+    return solution;
 }
