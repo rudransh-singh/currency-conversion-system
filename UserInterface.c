@@ -697,3 +697,68 @@ void PrintTradeBankGraph(PtrToTradebank T)
         }
     }
 }
+
+void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2)
+{
+
+    PtrToTradebank Traverse = Head; // We check if the bank exists or not
+    bool BankExists = false;
+    while (Traverse != NULL && !BankExists)
+    { // finds the bank
+        if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
+        {
+            BankExists = true;
+            break;
+        }
+        Traverse = Traverse->next;
+    }
+    if(BankExists)
+    {
+        PtrToCurrencyNode Checker = Traverse->CurrencyHead;
+        bool Currency1Exists = false, Currency2Exists = false;
+
+        while (Checker != NULL)
+        {
+            if (strcmp(Checker->NameOfCurrency, Currency1) == 0)
+                Currency1Exists = true;
+            if (strcmp(Checker->NameOfCurrency, Currency2) == 0)
+                Currency2Exists = true;
+            Checker = Checker->next;
+        }              
+        if (!Currency1Exists && !Currency2Exists) // both currency dont exists in the list
+        {
+            printf("neither currency exists");
+            return;
+        }
+        
+        else if (!Currency2Exists && Currency1Exists) // Currency 1 exists but currency 2 doesnt
+        {
+            printf("one of the currencies does not exist");
+            return;
+        }
+        else if (Currency2Exists && !Currency1Exists) // Currency 1 doesntexists but currency 2 exists
+        {
+            printf("one of the two currencies does not exist");
+            return;
+        }
+        else
+        {
+            int sourceid=searchforcurrency(Currency1,Traverse->CurrencyHead);
+            int destid=searchforcurrency(Currency2,Traverse->CurrencyHead);
+            if(EdgeExists(Traverse->G,sourceid,destid))
+            {
+                RemoveEdge(Traverse->G,sourceid,destid);
+            }
+            else
+            {
+               printf("no conversion rate exists between the two currencies");
+            }
+        }
+    }
+
+    else
+    {
+        printf("The Bank Does not Exist.\n");
+        return;
+    }
+}

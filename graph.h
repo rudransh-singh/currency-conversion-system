@@ -71,5 +71,7 @@ void DeleteGraph(PtrToGraphList G);                                            /
 void InsertEdge(PtrToGraphList G, int source, int destination, int weight);    //this function will add an edge to the graphlist from the source vertex to the destination vertex with a given weight
 void PrintGraph(PtrToGraphList G);                                             //just some utility function to print the graph to see whether it is working or not
 dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex); //This function is the dijkstra algo to calculate minimum cost path from a given vertex to all other vertices
-int EdgeExists(PtrToGraphList G, int source, int dest);
+int EdgeExists(PtrToGraphList G, int source, int dest);                        //this function checks if a particular edge exists in the graph
+void RemoveEdge(PtrToGraphList G, int source, int dest);                       //this function removes an edge from the graph, if it exists 
+
 #endif                                                                         // !GRAPH__H

@@ -219,3 +219,34 @@ int EdgeExists(PtrToGraphList G, int source, int dest)
     }
     return found;
 }
+
+void RemoveEdge(PtrToGraphList G, int source, int dest)
+{
+    PtrToGraphNode tempgraphnode;
+    tempgraphnode=G->GraphVertexArray[source];
+    if(tempgraphnode==NULL)
+    return;
+    else
+    {
+            if (tempgraphnode->VertexID == dest)
+            {
+                free(tempgraphnode);
+                G->GraphVertexArray[source] = NULL;
+                return;
+            }
+            else
+            {
+            tempgraphnode = G->GraphVertexArray[source]->next;
+            PtrToGraphNode prevgraphnode = G->GraphVertexArray[source];
+                for (; tempgraphnode; tempgraphnode = tempgraphnode->next, prevgraphnode = prevgraphnode->next)
+                {
+                    if (tempgraphnode->VertexID == dest)
+                    {
+                        prevgraphnode->next = tempgraphnode->next;
+                        free(tempgraphnode);
+                        break;
+                    }
+                }
+            }
+    }
+}
