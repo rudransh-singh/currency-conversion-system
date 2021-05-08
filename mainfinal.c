@@ -11,19 +11,6 @@
 #include <ctype.h>
 #include <limits.h>
 
-<<<<<<< HEAD
-void UserData(){
-    printf("1.Add Trade Bank\n");//good
-    printf("2.Remove Trade Bank\n"); //good
-    printf("3.Add Currency Exchange\n");    //good          //****
-    printf("4.Remove Currency Exchange\n");     //good      //****
-    printf("5.Add Currency To TradeBank\n");//good 
-    // printf("6.Search For Currency\n");//remove
-    printf("8.Delete Curency from Tradebank\n");//good
-    printf("10.Print Trade Bank List\n ");
-    printf("11.Print Trade Bank details\n");  //good           //****
-    // printf("12.Print Trade Bank Graph\n"); //remove           //****
-=======
 void UserData()
 {                                                //function to print all the available commands to user
     printf("1.Add Trade Bank\n");                //good
@@ -34,7 +21,6 @@ void UserData()
     printf("6.Search For Cycle\n");              //remove
     printf("8.Delete Curency from Tradebank\n"); //good
     printf("11.Print Trade Bank List\n");        //good           //****
->>>>>>> 4c6c7c94f64c353d673d6cf229feaf1b7e5da52c
     printf("13.Dijkstra On Bank List\n"); //good            //****
     printf("14.Show UserData\n");         //good
     printf("15.Exit\n");                  //good
@@ -186,7 +172,7 @@ int main()
         else if(strcmp(Operation,"11")==0){
             PrintTradeBankList2();
             
-
+        }
         else if (strcmp(Operation, "11") == 0) //Operation 11 (PRINT TRADE BANK) Starts Here
         {
             PrintTradeBankList2(); //Prints all the available Trade Banks and the list of Currencies supported by them respectively
