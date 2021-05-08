@@ -47,11 +47,8 @@ struct Tradebank
     char NameOfTradeBank[100]; //Stores the name of the trade bank
     PtrToTradebank next;
     PtrToGraphList G;
-    // int currentcurrencynumber;//contains the number of currencies currently supported by the tradebank
-    // char AvailableCurrencies[1000][100];//will contain the list of all available currencies
     int availablevertices[1000];
     PtrToCurrencyNode CurrencyHead; //Head of the linked list
-    // add graph details later
 };
 
 //functions for the tradebank

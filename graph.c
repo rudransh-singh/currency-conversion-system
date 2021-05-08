@@ -220,21 +220,21 @@ int EdgeExists(PtrToGraphList G, int source, int dest)
     return found;
 }
 
-void RemoveEdge(PtrToGraphList G, int source, int dest)
+void RemoveEdge(PtrToGraphList G, int source, int dest) 
 {
-    PtrToGraphNode tempgraphnode;
-    tempgraphnode=G->GraphVertexArray[source];
-    if(tempgraphnode==NULL)
+    PtrToGraphNode tempgraphnode; //declaring a temporary pointer to struct GraphNode 
+    tempgraphnode=G->GraphVertexArray[source]; //equating the temp pointer to the source of the edge to be removed
+    if(tempgraphnode==NULL) //indicating the edge does not exist
     return;
     else
     {
-            if (tempgraphnode->VertexID == dest)
+            if (tempgraphnode->VertexID == dest) //if the first edge of the source is the edge to be removed we free the memory allocated to it
             {
                 free(tempgraphnode);
                 G->GraphVertexArray[source] = NULL;
                 return;
             }
-            else
+            else    //we will traverse all edges until we find the edge with destination as 'dest'
             {
             tempgraphnode = G->GraphVertexArray[source]->next;
             PtrToGraphNode prevgraphnode = G->GraphVertexArray[source];
@@ -243,7 +243,7 @@ void RemoveEdge(PtrToGraphList G, int source, int dest)
                     if (tempgraphnode->VertexID == dest)
                     {
                         prevgraphnode->next = tempgraphnode->next;
-                        free(tempgraphnode);
+                        free(tempgraphnode); //freeing the memory allocated to the temporary pointer to GraphNode
                         break;
                     }
                 }

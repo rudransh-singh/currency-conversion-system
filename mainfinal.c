@@ -19,7 +19,8 @@ void UserData(){
     printf("5.Add Currency To TradeBank\n");//good 
     // printf("6.Search For Currency\n");//remove
     printf("8.Delete Curency from Tradebank\n");//good
-    printf("11.Print Trade Bank List\n");  //good           //****
+    printf("10.Print Trade Bank List\n ");
+    printf("11.Print Trade Bank details\n");  //good           //****
     // printf("12.Print Trade Bank Graph\n"); //remove           //****
     printf("13.Dijkstra On Bank List\n"); //good            //****
     printf("14.Show UserData\n");//good
@@ -188,6 +189,13 @@ int main(){
             
         //     printf("\nEnter 14 for Operations Data\n\n");
         // }
+        
+        else if (strcmp(Operation, "10") == 0)
+        {
+            PrintTradeBankList();
+
+            printf("\nEnter 14 for Operations Data\n\n");
+        }
         
         
         

@@ -169,7 +169,7 @@ void DeleteCurrList(PtrToCurrencyNode C)
 
 void AddTradeBank(char *BankName)
 { // we use this function to open a new bank in the sense to creat a head structure
-    if (NoOfTradeBanks == 0)
+    if (NoOfTradeBanks == 0) //this is the first TradeBank to be added
     {
         ListofTradeBank = (PtrToTradebank)malloc(sizeof(Tradebank));
 
@@ -194,7 +194,7 @@ void AddTradeBank(char *BankName)
 
         PtrToTradebank Traverse = Head; // We check if the bank exists or not
         bool BankExists = true;
-        while (Traverse != NULL && BankExists)
+        while (Traverse != NULL && BankExists) //traversing to check if the bank already exists
         {
             if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
             {
@@ -204,7 +204,7 @@ void AddTradeBank(char *BankName)
             Traverse = Traverse->next;
         }
 
-        if (BankExists)
+        if (BankExists) //if the bank does not exist but other banks already exist in the list
         {
             Tradebank *NewBank = (Tradebank *)malloc(sizeof(Tradebank));
 
@@ -223,31 +223,24 @@ void AddTradeBank(char *BankName)
             Tail = NewBank;       // updating the tail
 
             Tail->next = NULL;
-            NoOfTradeBanks++;
+            NoOfTradeBanks++;     //incrementing the number of TradeBanks
         }
-        else
+        else                      //if the bank already exists
         {
             printf("Bank Already exists");
             return;
         }
     }
-} //we have to figure out how to create a new trade bank with variable name given to us by user
+}
 
 void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int ConversionRate)
 {
-    // char TradeBankName[50], Currency1[50],Currency2[50];
-    // int exchangerate , comm;
-    // scanf("%s %s %s %d %d",TradeBankName,Currency1,Currency2,&exchangerate,&commission);
-    // for()check if the TradeBankName exist ya nahi;
-    // nahi hua toh naya bana denge , else we ll just add the curr1 and 2 to the bank;
-    // if it doesnot exist we ll AddTradeBank(TradeBankName);
-    //AddCurrency(TradeBankName);
-    PtrToTradebank Traverse = Head; // We check if the bank exists or not
-    bool BankExists = false;
+    PtrToTradebank Traverse = Head; 
+    bool BankExists = false;        
 
-    while (Traverse != NULL && !BankExists)
-    { // finds the bank
-        if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
+    while (Traverse != NULL && !BankExists) // We check if the bank exists or not by traversing the list
+    {                                       // using the temporary Pointer to struct TradeBank 'Traverse'
+        if (strcmp(Traverse->NameOfTradeBank, BankName) == 0) //if the bank is found we change the bool variable to true and exit the loop
         {
             BankExists = true;
             break;
@@ -255,7 +248,7 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
         Traverse = Traverse->next;
     }
 
-    if (BankExists)
+    if (BankExists) //if the bank is found we check if the currencies exist
     {
         PtrToCurrencyNode Checker = Traverse->CurrencyHead;
         bool Currency1Exists = false, Currency2Exists = false;
@@ -277,7 +270,7 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
             while (Duplicate->availablevertices[id2] != 0)
                 id2++;
 
-            Traverse->availablevertices[id1] = 1; // finds inde
+            Traverse->availablevertices[id1] = 1; // finds available index and creates currency there
             Duplicate->availablevertices[id2] = 1;
 
             if (Traverse->CurrencyHead->Vertexid == -1) // no currency added to the currency list of the selected trade bank yet
@@ -458,17 +451,17 @@ void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int C
 
 void RemoveTradeBank(char *BankName)
 {
-    PtrToTradebank current, previous, position;
-    current = Head->next;
-    previous = Head;
-    if (strcmp(Head->NameOfTradeBank, BankName) == 0)
+    PtrToTradebank current, previous, position; //creates 3 temporary Pointers to struct TradeBank for traversal
+    current = Head->next; //Points to the 2nd TradeBank
+    previous = Head; //Points to the 1st TradeBank
+    if (strcmp(Head->NameOfTradeBank, BankName) == 0) //if the bank to be deleted is the first Trade bank in the list
     {
         position = Head;
-        Head = Head->next;
+        Head = Head->next; //the 1st bank shall then point to the second bank(which now becomes the first bank)
     }
     else
     {
-        while (current != NULL)
+        while (current != NULL) //traversing the list of trade banks to find the Trade bank to be deleted
         {
             if (strcmp(current->NameOfTradeBank, BankName) == 0)
             {
@@ -477,7 +470,7 @@ void RemoveTradeBank(char *BankName)
             current = current->next;
             previous = previous->next;
         }
-        if (current == NULL)
+        if (current == NULL) //we have reached the end of the list but could not find the name of the bank indicating it does not exist
         {
             printf("The Trade bank does not exist.\n");
             return;
@@ -486,14 +479,14 @@ void RemoveTradeBank(char *BankName)
         position = current;
     }
 
-    DeleteCurrList(position->CurrencyHead);
-    DeleteGraph(position->G);
+    DeleteCurrList(position->CurrencyHead); //deletes currency list of the Position pointer
+    DeleteGraph(position->G);               //deletes the graph
     position->next = NULL;
-    free(position);
+    free(position);                         //frees the memory allocated to the Pointer Position
 }
 
-void PrintTradeBankList()
-{
+void PrintTradeBankList()    
+{ //this function creates a temporary pointer for traversal and then prints each TradeBank as it traverses the list of trade banks 
     PtrToTradebank temp;
     temp = Head;
     while (temp != NULL)
@@ -505,19 +498,19 @@ void PrintTradeBankList()
 
 
 void PrintTradeBankList2()
-{
+{ //this function is a more detailed version of the previous print function
     PtrToTradebank temp;
     temp = Head;
     while (temp != NULL)
     {
-        printf("Name of TradeBank->%s\n", temp->NameOfTradeBank);
-        printf("Currencies supported by the Tradebank are \n");
+        printf("Name of TradeBank->%s\n", temp->NameOfTradeBank); //prints name of the bank
+        printf("Currencies supported by the Tradebank are \n");   // prints name of currencies in the bank
         PtrToCurrencyNode tc=temp->CurrencyHead->next;
         for(;tc;tc=tc->next)
         {
             printf("%s\n",tc->NameOfCurrency);
         }
-        printf("\n currency conversion rates are\n");
+        printf("\n currency conversion rates are\n"); //prints conversion rates between the currencies
         PrintTradeBankGraph(temp);
         temp = temp->next;
         printf("--------------------");
@@ -555,17 +548,11 @@ void PrintTradeBankList2()
 
 void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int ConversionRate)
 {
-    // char TradeBankName[50], Currency1[50],Currency2[50];
-    // int exchangerate , comm;
-    // scanf("%s %s %s %d %d",TradeBankName,Currency1,Currency2,&exchangerate,&commission);
-    // for()check if the TradeBankName exist ya nahi;
-    // nahi hua toh naya bana denge , else we ll just add the curr1 and 2 to the bank;
-    // if it doesnot exist we ll AddTradeBank(TradeBankName);
-    //AddCurrency(TradeBankName);
-    PtrToTradebank Traverse = Head; // We check if the bank exists or not
-    bool BankExists = false;
+    PtrToTradebank Traverse = Head; //declaring temporary pointer to struct TradeBank to traverse the List of Tradebanks
+    bool BankExists = false;        //declaring bool variable to check if the bank exists or not
 
-    while (Traverse != NULL && !BankExists)
+    while (Traverse != NULL && !BankExists) // We check if the bank exists or not by traversing the list
+                                            // using the temporary Pointer to struct TradeBank 'Traverse'
     { // finds the bank
         if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
         {
@@ -596,7 +583,7 @@ void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int 
         
         else if (!Currency2Exists && Currency1Exists) // Currency 1 exists but currency 2 doesnt
         {
-            printf("one of the currencies does not exist");
+            printf("one of the two currencies does not exist");
             return;
         }
         else if (Currency2Exists && !Currency1Exists) // Currency 1 doesntexists but currency 2 exists
@@ -606,13 +593,13 @@ void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int 
         }
         else
         {
-            int sourceid=searchforcurrency(Currency1,Traverse->CurrencyHead);
-            int destid=searchforcurrency(Currency2,Traverse->CurrencyHead);
+            int sourceid=searchforcurrency(Currency1,Traverse->CurrencyHead); //finds the vertexID of currency1
+            int destid=searchforcurrency(Currency2,Traverse->CurrencyHead);   //finds the vertexID of currency2
             if(EdgeExists(Traverse->G,sourceid,destid))
             printf("There already exists a conversion between the two given currencies");
             else
             {
-                InsertEdge(Traverse->G,sourceid,destid,ConversionRate);
+                InsertEdge(Traverse->G,sourceid,destid,ConversionRate); //if edge deos not exist we create an edge between the two vertices(currencies)
             }
         }
     }
