@@ -1,24 +1,13 @@
 #ifndef __CurrencyUI
 #define __CurrencyUI
 
-// Takes the name of the bank and returns the array
-// adds currencies to selected "TradeBankName" and stores the conversion between them
-// if currency exchange already exists we update it else make new edge
-/*
-1. Add or delete a Trade bank. (String)
-2. Add or delete a currency. (String)
-3. Add or delete a currency conversion from a specied Trade Bank. (Conversion rate - Integer)
-4. The best path of converting from currency A to B along with it's cost and the chosen Trade Bank.You can only choose a single Trade Bank for all the exchanges regarding this query.
-*/
 typedef struct DijkstraBankInfo DijkstraBankInfo;
-struct DijkstraBankInfo
+
+struct DijkstraBankInfo // Structure for Dijkistra Algorithm
 {
     int mincost;
     char TradeBankName[100];
 };
-
-
-
 
 
 PtrToCurrencyNode CreateEmptyCurrList(); //creates a dummy node and returns it's value
@@ -30,32 +19,16 @@ void DeleteCurrList(PtrToCurrencyNode C); //frees pointers in the currency list
 void AddTradeBank(char *BankName); //adds a new Tradebank to the linked list
 void AddCurrencyExchange(char *BankName, char *Currency1, char *Currency2, int ConversionRate); //adds an edge in the currency graph of a Tradebank
 void RemoveCurrencyExchange(char* BankName, char* source, char* dest); //deletes an edge in the currency graph of a Tradebank
-void RemoveTradeBank(char* BankName);
-void PrintTradeBankList();
-void PrintTradeBankList2();
-void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int ConversionRate);
-void AddCurrencyToTradeBank(char *Bankname,char *inputcurrency);
-void PrintTradeBankGraph(PtrToTradebank T);
-void RemoveCurrencyFromTradeBank(char *BankName, char* inputcurrency);
+void RemoveTradeBank(char* BankName); //removes the Trade Bank selected and all the currencis and the graph that Trade Bank holds
+void PrintTradeBankList();  //only prints name of Trade Banks
+void PrintTradeBankList2(); //prints Trade Bank list with the currencies it holds
+void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int ConversionRate); //Updated Version of AddCurrenyExchange 
+void AddCurrencyToTradeBank(char *Bankname,char *inputcurrency); //checks if the input currency exists in the Trade Bank.If not then addes currency to it
+void PrintTradeBankGraph(PtrToTradebank T); //this function prints the graph of a selected Trade Bank
+void RemoveCurrencyFromTradeBank(char *BankName, char* inputcurrency); //this function removes the inputted currency from the inputted Trade Bank
 void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2); //this function removes a currency exchange from the currency graph, if it exists 
-DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency);
-void CycleCheckinTradeBank(char* BankName);
+DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency); //runs dijkistra on all the available Trade Banks and finds best conversion between the input currencies 
+void CycleCheckinTradeBank(char* BankName); // this function checks for cycle in the graph of a given trade bank by running Tarjan's Algorithm 
+                                            //and by comparing the number of Strongly Connected Components with number of Vertices.
 
-
-
-// void AddTradeBank(char* BankName);// Parth Anish
-
-// void AddCurrencyExchange(char* BankName,char* Currency1 , char* Currency2 , int ConversionRate); // Parth nd Anish
-
-// void DeleteTradeBank(char* BankName);//Rohan 
-
-// void DeleteCurrency(char* BankName,char* CurrencyName); // RP
- 
-// // void UpdateCommission(char* BankName,char* Currency1 , char* Curreny2, int commission); // Vikram
-// void RemoveCurrencyExchange(char* BankName, char* source, char* dest);
-
-// void UpdateCurrencyExchange(char* BankName, char* Currency1, char* Currency2, int ConversionRate); // Vikram
-// void AddCurrencyToGlobalList(char* inputcurrency);
-// int LookupCurrencyVertex(char* inputcurrency);
-// void PrintAllCurrencies();
 #endif
