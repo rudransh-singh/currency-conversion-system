@@ -17,7 +17,7 @@ void UserData(){
     printf("3.Add Currency Exchange\n");    //good          //****
     printf("4.Remove Currency Exchange\n");     //good      //****
     printf("5.Add Currency To TradeBank\n");//good 
-    // printf("6.Search For Currency\n");//remove
+    printf("6.Search For Cycle\n");//remove
     printf("8.Delete Curency from Tradebank\n");//good
     printf("11.Print Trade Bank List\n");  //good           //****
     // printf("12.Print Trade Bank Graph\n"); //remove           //****
@@ -132,16 +132,14 @@ int main(){
         
         
         
-        // else if(strcmp(Operation,"6")==0){
-        //     char Currency[50];
+        else if(strcmp(Operation,"6")==0){
+            char BankName[50];
             
-        //     printf("Enter Currency1:");
-        //     scanf("%s",Currency); 
-            
-        //     searchforcurrency(Currency,CurrNode);
-            
-        //     printf("\nEnter 14 To View Operations Data\n\n");
-        // }
+            printf("Enter BankName:");
+            scanf("%s",BankName);
+            CycleCheckinTradeBank(BankName); 
+            printf("\nEnter 14 To View Operations Data\n\n");
+        }
         
         
         
@@ -217,7 +215,7 @@ int main(){
             printf("Enter DEstination Currency:");
             scanf("%s",destcurrency);
             
-            printf("The shortest conversion rate between the two currencies is %d\n",DijkstraOnBankList(sourcecurrency,destcurrency));
+            printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n",DijkstraOnBankList(sourcecurrency,destcurrency).mincost, DijkstraOnBankList(sourcecurrency,destcurrency).TradeBankName);
             
             printf("\nEnter 14 for Operations Data\n\n");
         }

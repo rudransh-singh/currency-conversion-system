@@ -21,7 +21,6 @@ struct DijkstraBankInfo
 
 
 
-
 PtrToCurrencyNode CreateEmptyCurrList(); //creates a dummy node and returns it's value
 int searchforcurrency(char *inputcurrency, PtrToCurrencyNode C); //search for the input currency in the given currency linked list
 void addcurrency(char *inputcurrency, int vertexid, PtrToCurrencyNode c); //add the input currency to the currency linked list
@@ -40,6 +39,7 @@ void PrintTradeBankGraph(PtrToTradebank T);
 void RemoveCurrencyFromTradeBank(char *BankName, char* inputcurrency);
 void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2); //this function removes a currency exchange from the currency graph, if it exists 
 DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency);
+void CycleCheckinTradeBank(char* BankName);
 
 
 

@@ -506,6 +506,7 @@ void PrintTradeBankList()
 
 void PrintTradeBankList2()
 {
+    printf("\n\n\n");
     PtrToTradebank temp;
     temp = Head;
     while (temp != NULL)
@@ -517,10 +518,10 @@ void PrintTradeBankList2()
         {
             printf("%s\n",tc->NameOfCurrency);
         }
-        printf("\n currency conversion rates are\n");
+        printf("\nCurrency conversion rates are\n");
         PrintTradeBankGraph(temp);
         temp = temp->next;
-        printf("--------------------");
+        printf("--------------------\n\n\n");
     }
 }
 
@@ -768,6 +769,7 @@ void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2)
         return;
     }
 }
+
 DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency)
 {
     DijkstraBankInfo solution;
@@ -825,5 +827,71 @@ void RemoveCurrencyFromTradeBank(char *BankName, char* inputcurrency)
     {
         printf("Bank Does Not Exist");
         return;
+    }
+}
+
+void CycleCheckinTradeBank(char* BankName)
+{
+        PtrToTradebank Traverse = Head; // We check if the bank exists or not
+    bool BankExists = false;
+    while (Traverse != NULL && !BankExists)
+    { // finds the bank
+        if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
+        {
+            BankExists = true;
+            break;
+        }
+        Traverse = Traverse->next;
+    }
+    if(BankExists)
+    {
+        int currencycount=0;
+        PtrToCurrencyNode t=Traverse->CurrencyHead->next;
+        for(;t;t=t->next)
+        {
+            currencycount++;
+        }
+        int low[currencycount];
+        int scccount=Tarjan(Traverse->G,low,currencycount);
+        if(currencycount==scccount)
+         {
+        
+        printf("no cycle exists");
+        }
+        else
+        {
+        
+        printf("cycle exists\n");
+        int cyclecounter=0;
+        for(int i=0;i<currencycount;i++)
+        {
+            cyclecounter=0;
+            for(int j=0;j<currencycount;j++)
+            {
+                if(low[j]==i)
+                cyclecounter++;
+            }
+            if(cyclecounter>1)
+            {
+                for(int j=0;j<currencycount;j++)
+                {
+                    if(low[j]==i)
+                    {
+                        printcurrencyofvertexid(Traverse->CurrencyHead,j);
+                        printf(" ");
+                    }
+
+                }
+                printf("\n");
+            }
+            
+        }
+        }
+        return;
+    }
+    else
+    {
+        printf("Bank does not exist");
+        return ;
     }
 }

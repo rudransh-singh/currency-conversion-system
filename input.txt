@@ -1,0 +1,14 @@
+1 sbi
+1 hdfc
+1 dena
+5 sbi rupee
+5 sbi dollar
+5 sbi euro
+5 sbi yen
+11
+3 sbi rupee dollar 10
+3 sbi dollar yen 15
+3 sbi yen rupee 20
+11
+6 sbi
+15
