@@ -37,6 +37,7 @@ void PrintTradeBankList2();
 void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int ConversionRate);
 void AddCurrencyToTradeBank(char *Bankname,char *inputcurrency);
 void PrintTradeBankGraph(PtrToTradebank T);
+void RemoveCurrencyFromTradeBank(char *BankName, char* inputcurrency);
 void RemoveCurrencyExchange(char *BankName, char *Currency1, char *Currency2); //this function removes a currency exchange from the currency graph, if it exists 
 DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency);
 

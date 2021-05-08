@@ -225,6 +225,11 @@ void AddTradeBank(char *BankName)
             Tail->next = NULL;
             NoOfTradeBanks++;
         }
+        else
+        {
+            printf("Bank Already exists");
+            return;
+        }
     }
 } //we have to figure out how to create a new trade bank with variable name given to us by user
 
@@ -788,4 +793,37 @@ DijkstraBankInfo DijkstraOnBankList(char* sourcecurrency, char* destcurrency)
         }
     }
     return solution;
+}
+void RemoveCurrencyFromTradeBank(char *BankName, char* inputcurrency)
+{
+    PtrToTradebank Traverse = Head; // We check if the bank exists or not
+    bool BankExists = false;
+    while (Traverse != NULL && !BankExists)
+    { // finds the bank
+        if (strcmp(Traverse->NameOfTradeBank, BankName) == 0)
+        {
+            BankExists = true;
+            break;
+        }
+        Traverse = Traverse->next;
+    }
+    if(BankExists)
+    {
+        int currencyid=searchforcurrency(inputcurrency,Traverse->CurrencyHead);
+        if(currencyid==-1)
+        {
+            printf("currency does not exist");
+            return;
+        }
+        else
+        {
+            DeleteVertex(Traverse->G,currencyid);
+            return;
+        }
+    }
+    else
+    {
+        printf("Bank Does Not Exist");
+        return;
+    }
 }
