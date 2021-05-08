@@ -54,24 +54,14 @@ struct Tradebank
     // add graph details later
 };
 
-//functions for currency linked list
-//these are present inside the tradebank struct
-// PtrToCurrencyNode CreateEmptyCurrList();
-// int searchforcurrency(char *inputcurrency, PtrToCurrencyNode C);//searches for the currency in the given linkedlist
-// void addcurrency(char *inputcurrency, int vertexid,PtrToCurrencyNode C);//adds a currency to the given linked list
-// void deletecurrency(char *inputcurrency, PtrToCurrencyNode C);//deletes the given currency from the linked list
-// void DeleteCurrList(PtrToCurrencyNode C);
-// void printcurrencylist(PtrToCurrencyNode C);//just a utility/testing function to check whether the linked list works
-
 //functions for the tradebank
-
 PtrToGraphList CreateGraph(int NumberOfVertices); //This function will create a graph with the given number of vertices, for our case it will be 1e3
-void DeleteVertex(PtrToGraphList G, int vertex);
-void DeleteGraph(PtrToGraphList G);                                            //deletes the entire graph struct;
+void DeleteVertex(PtrToGraphList G, int vertex);  //This function deletes all the incoming and outgoing edges from a vertex and deletes it. 
+void DeleteGraph(PtrToGraphList G);                                            //deletes the entire graph struct entered;
 void InsertEdge(PtrToGraphList G, int source, int destination, int weight);    //this function will add an edge to the graphlist from the source vertex to the destination vertex with a given weight
-void PrintGraph(PtrToGraphList G);                                             //just some utility function to print the graph to see whether it is working or not
+void PrintGraph(PtrToGraphList G);                                             //function to print the graph and its vertices
 dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex); //This function is the dijkstra algo to calculate minimum cost path from a given vertex to all other vertices
 int EdgeExists(PtrToGraphList G, int source, int dest);                        //this function checks if a particular edge exists in the graph
 void RemoveEdge(PtrToGraphList G, int source, int dest);                       //this function removes an edge from the graph, if it exists 
 
-#endif                                                                         // !GRAPH__H
+#endif                                                                        

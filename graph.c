@@ -9,13 +9,13 @@ PtrToGraphList CreateGraph(int NumberOfVertices)
     //Allocating memory to the List
     G = (PtrToGraphList)malloc(sizeof(GraphList)); //malloc'ed memory here
     //asserting whether memory has been allocated or not
-    if (G == NULL)
+    if (G == NULL)  //memory could not be allocated.
     {
         printf("Malloc failed!\n");
         exit(0);
     }
     G->NumberOfVertices = NumberOfVertices;
-    G->GraphVertexArray = (PtrToGraphNode *)malloc(NumberOfVertices * sizeof(PtrToGraphNode));
+    G->GraphVertexArray = (PtrToGraphNode *)malloc(NumberOfVertices * sizeof(PtrToGraphNode));  //This makes an array of pointers to nodes.
     //asserting for memory allocation
     if (G->GraphVertexArray == NULL)
     {
@@ -134,29 +134,28 @@ dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
 }
 void DeleteGraph(PtrToGraphList G)
 {
-
     for (int i = 0; i < G->NumberOfVertices; i++)
     {
         PtrToGraphNode temp;
-        if (G->GraphVertexArray[i] == NULL)
+        if (G->GraphVertexArray[i] == NULL) //checks if there is any data in the particular vertex to remove and if there is not it will continue 
             continue;
         while (G->GraphVertexArray[i]->next != NULL)
         {
-            temp = G->GraphVertexArray[i];
-            G->GraphVertexArray[i] = G->GraphVertexArray[i]->next;
-            free(temp);
+            temp = G->GraphVertexArray[i];                         //equating the temporary node to that particular vertex and 
+            G->GraphVertexArray[i] = G->GraphVertexArray[i]->next; //then accessing the next element and freeing the temp node until it points to NULL
+            free(temp);                                            //indicating the last element had been deleted
         }
-        free(G->GraphVertexArray[i]);
+        free(G->GraphVertexArray[i]); //freeing the memory allocated to the particular vertex and equating it to NULL
         G->GraphVertexArray[i] = NULL;
     }
-    free(G->GraphVertexArray);
-    free(G);
+    free(G->GraphVertexArray); //freeing the memory allocated to the array of pointer to Graphnodes
+    free(G); //freeing the memory allocated to the Pointer to the particular struct GraphList
 }
 void DeleteVertex(PtrToGraphList G, int vertex)
 {
     PtrToGraphNode tempgraphnode; //temporary node
     PtrToGraphNode prevgraphnode; //pointer to previous node
-    for (int i = 0; i < G->NumberOfVertices; i++)
+    for (int i = 0; i < G->NumberOfVertices; i++) //for loop to traverse all the vertices of the graph
     {
         if (i == vertex)
             continue;
