@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
+
+
 PtrToGraphList CreateGraph(int NumberOfVertices)
 {
     PtrToGraphList G; //making temporary Graphlist which we will return in the end
@@ -230,8 +232,8 @@ void RemoveEdge(PtrToGraphList G, int source, int dest)
     {
             if (tempgraphnode->VertexID == dest) //if the first edge of the source is the edge to be removed we free the memory allocated to it
             {
+                G->GraphVertexArray[source] = tempgraphnode->next;
                 free(tempgraphnode);
-                G->GraphVertexArray[source] = NULL;
                 return;
             }
             else    //we will traverse all edges until we find the edge with destination as 'dest'
@@ -249,4 +251,125 @@ void RemoveEdge(PtrToGraphList G, int source, int dest)
                 }
             }
     }
+}
+stackhead initstack()
+{
+    stackhead S;
+    S=(ptrtostack)malloc(sizeof(stack));
+    S->value=-1;
+    S->next=NULL;
+    return S;
+}
+void push(ptrtostack S,int value)
+{
+    ptrtostack x;
+    x=initstack();
+    x->value=value;
+    x->next=S->next;
+    S->next=x;
+}
+ptrtostack pop(ptrtostack S)
+{
+    ptrtostack temp1=NULL;
+    if(S->next==NULL)
+    {
+        printf("Stack is empty");
+        return temp1;
+    }
+    //since i only have to remove from the top
+    ptrtostack temp=S->next;
+    S->next=S->next->next;
+    return temp;
+    //displaystack(S);
+}
+void displaystack(stackhead S)
+{
+    if(S==NULL)
+    {
+        printf("Stack does not exist!!!");
+        return;
+    }
+    else if (S->next==NULL)
+    {
+        printf("Stack is empty");
+        return;
+    }
+    else
+    {
+        ptrtostack t=S->next;
+        for(;t;t=t->next)
+        {
+            printf("%d",t->value);
+        }
+        printf("\n\n");
+    }
+
+}
+
+
+
+
+int min(int a,int b)
+{
+    if(a<b)
+    return a;
+    else 
+    return b;
+}
+
+void depthfirst(PtrToGraphList G,stackhead S,int *id, int source, int ids[], int onstack[], int low[], int *scccount)
+{
+push(S,source);
+onstack[source]=1;
+ids[source]=low[source]= source;
+PtrToGraphNode tempgraphnode;
+tempgraphnode=G->GraphVertexArray[source];
+if(tempgraphnode!=NULL)
+{
+for(;tempgraphnode;tempgraphnode=tempgraphnode->next)
+{
+    if(ids[tempgraphnode->VertexID]==-1)
+    depthfirst(G,S,id,tempgraphnode->VertexID,ids,onstack,low,scccount);
+    if(onstack[tempgraphnode->VertexID]==1)
+    low[source]=min(low[source],low[tempgraphnode->VertexID]);
+}
+}
+if(ids[source]==low[source])
+{
+    for(ptrtostack node=pop(S);;node=pop(S))
+    {
+        onstack[node->value]=0;
+        low[node->value]=ids[source];
+        if(node->value==source)
+        break;
+
+    }
+    (*scccount)++;
+}
+}
+
+
+int Tarjan(PtrToGraphList G, int low[], int NumberofVertices)
+{
+    // we will returning the low array, which will calculate the low link values of the vertices
+    //vertices with the same low link value are in the same component
+    int id=0;
+    int scccount=0;
+    int ids[NumberofVertices];
+    //int low[NumberofVertices];
+    int onstack[NumberofVertices];
+    stackhead S;
+    S=initstack();//making an empty stack, supports push and pop operations
+    for(int i=0;i<NumberofVertices;i++)
+    {
+        ids[i]=-1;
+        low[i]=0;
+        onstack[i]=0;
+    }
+    for(int i=0;i< NumberofVertices;i++)
+    {
+        if(ids[i]==-1)
+        depthfirst(G,S,&id,i,ids,onstack,low,&scccount);
+    }
+    return scccount;
 }

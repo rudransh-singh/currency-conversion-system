@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+//#include "UserInterface.c"
+//#include "graph.c"
 #include "graph.h"
 #include "priorityqueue.h"
 #include "UserInterface.h"
+//#include "priorityqueue.c"
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h> 

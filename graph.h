@@ -51,6 +51,18 @@ struct Tradebank
     PtrToCurrencyNode CurrencyHead; //Head of the linked list
 };
 
+typedef struct stack stack; 
+typedef stack* ptrtostack;
+typedef stack* stackhead;
+struct stack{
+    int value;
+    stack* next;
+};
+stackhead initstack();
+void push(ptrtostack S,int value);
+ptrtostack pop(ptrtostack S);
+void displaystack(stackhead S);
+
 //functions for the tradebank
 PtrToGraphList CreateGraph(int NumberOfVertices); //This function will create a graph with the given number of vertices, for our case it will be 1e3
 void DeleteVertex(PtrToGraphList G, int vertex);  //This function deletes all the incoming and outgoing edges from a vertex and deletes it. 
@@ -60,5 +72,8 @@ void PrintGraph(PtrToGraphList G);                                             /
 dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex); //This function is the dijkstra algo to calculate minimum cost path from a given vertex to all other vertices
 int EdgeExists(PtrToGraphList G, int source, int dest);                        //this function checks if a particular edge exists in the graph
 void RemoveEdge(PtrToGraphList G, int source, int dest);                       //this function removes an edge from the graph, if it exists 
+int min(int a, int b);
+int Tarjan(PtrToGraphList G, int low[], int NumberofVertices);//performs Tarjan's SCC algorithm to find out the number of Singly connected componenents in the graph
+void depthfirst(PtrToGraphList G,stackhead S,int *id, int source, int ids[], int onstack[], int low[], int *scccount);//modified depth first search which is used as a subroutine to the Tarjan algo
 
 #endif                                                                        
