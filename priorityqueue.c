@@ -107,15 +107,15 @@ HeapNode ExtractMin(PtrToMinHeap H) //extract min value from heap(zeroth-index)
 void DeleteKeyHeap(PtrToMinHeap H, int index)
 {
     DecreaseKey(H, index, INT_MIN); //simple trick to Delete a particular index of the heap, just decrease value at the index to INT_MIN
-    ExtractMin(H);//extract the min value, that is the index which we want to delete
+    ExtractMin(H);                  //extract the min value, that is the index which we want to delete
 }
 
 HeapNode GetMin(PtrToMinHeap H)
 {
-    return H->Harr[0];//this returns the Minimum value of the heap, without removing it from the heap
+    return H->Harr[0]; //this returns the Minimum value of the heap, without removing it from the heap
 }
 
-void PrintHeap(PtrToMinHeap H)//Prints the Heap array
+void PrintHeap(PtrToMinHeap H) //Prints the Heap array
 {
     for (int i = 0; i < H->heap_size; i++)
     {
