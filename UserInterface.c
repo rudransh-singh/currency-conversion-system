@@ -501,7 +501,7 @@ DijkstraBankInfo DijkstraOnBankList(char *sourcecurrency, char *destcurrency)
         if (sourceid != -1 && destid != -1)
         {
             dijkstra answer;
-            answer = dijkstraalgo(t->G, 10, sourceid);
+            answer = dijkstraalgo(t->G, 1000, sourceid);
             if (answer.dist[destid] < solution.mincost)
             {
                 solution.mincost = answer.dist[destid];
