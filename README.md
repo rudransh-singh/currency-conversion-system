@@ -1,8 +1,12 @@
 # Currency Conversion Program
 
-This is a simple program to convert one currency to another in accordance with the corresponding currency conversion rates and to find the best method of conversion between two currencies. 
+## Overview
 
-The main.c program has an infinite while loop to felicitate multiple queries. Each query is made by entering the number of the operation to be performed followed by additional information if required, like the name of the trade bank, currency conversion rate or currency name.
+This is a simple program to convert one currency to another in accordance with the corresponding currency conversion rates and to find the best method of conversion between two currencies using Dijkstra's algorithm. The program can also detect a cycle of conversions among currencies in a trade bank.
+
+## Usage
+
+The main.c program has an infinite while loop to facilitate multiple queries. Each query is made by entering the number of the operation to be performed followed by additional information if required, like the name of the trade bank, currency conversion rate or currency name.
 
 
 The list of possible operations along with their input command syntax is given below:
@@ -44,11 +48,30 @@ Outputs a positive integer to indicate the least cost of the required conversion
     $ 10<br>
 This command breaks out of the while loop and terminates the program.
 
+## Compilation and Execution
 
-The 4 files that need to be compiled to generate the final executable binary file are priorityqueue.c, graph.c, UserInterface.c and main.c. The command to do this is:
+The 4 files that need to be compiled to generate the final executable binary file are priorityqueue.c, graph.c, UserInterface.c and main.c. The command to do this is:<br>
 $ gcc priorityqueue.c graph.c UserInterface.c main.c -o final
 
-Here, final is the binary file that can be executed. To run the program, type the followind command:
+Here, final is the binary file that can be executed. To run the program, type the following command:<br>
 $ ./final < input.txt
 
+The program can also be run using the following shell script:<br>
+```c 
+#!/bin/sh
+gcc priorityqueue.c graph.c UserInterface.c main.c -o final
+./final < input.txt
+```
+
 The file input.txt contains a list of all user inputs for a single run of the program. The list of user commands in the file usually starts with "Add Trade Bank" and ends with "Exit". Each user command in input.txt is on a separate line. 
+
+## Running Program on Terminal
+
+```C
+git clone https://github.com/rudransh-singh/currency-conversion-system.git
+cd currency-conversion-system
+gcc main.c graph.c priorityqueue.c UserInterface.c
+```
+
+
+
