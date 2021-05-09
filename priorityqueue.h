@@ -34,4 +34,4 @@ int parent(int index);                                            //returns inde
 HeapNode GetMin(PtrToMinHeap H);                                  //returns Minimum value of MinHeap, different from ExtractMin which also removes the minimum value as well
 void PrintHeap(PtrToMinHeap H);                                   //Prints the Heap array
 
-#endif                                                            // !QUEUE__H
+#endif // !QUEUE__H

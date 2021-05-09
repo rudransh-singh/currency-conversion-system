@@ -12,18 +12,18 @@
 #include <limits.h>
 
 void UserData()
-{                                                //function to print all the available commands to user
-    printf("1.Add Trade Bank\n");                
-    printf("2.Remove Trade Bank\n");             
-    printf("3.Add Currency Exchange\n");        
-    printf("4.Remove Currency Exchange\n");      
-    printf("5.Add Currency To TradeBank\n");     
-    printf("6.Delete Curency from Tradebank\n"); 
-    printf("7.Search For Cycle\n");              
-    printf("8.Print Trade Bank List\n");        
-    printf("9.Dijkstra On Bank List\n"); 
-    printf("10.Show UserData\n");         
-    printf("11.Exit\n");                  
+{ //function to print all the available commands to user
+    printf("1.Add Trade Bank\n");
+    printf("2.Remove Trade Bank\n");
+    printf("3.Add Currency Exchange\n");
+    printf("4.Remove Currency Exchange\n");
+    printf("5.Add Currency To TradeBank\n");
+    printf("6.Delete Curency from Tradebank\n");
+    printf("7.Search For Cycle\n");
+    printf("8.Print Trade Bank List\n");
+    printf("9.Dijkstra On Bank List\n");
+    printf("10.Show UserData\n");
+    printf("11.Exit\n");
 }
 
 int main()
@@ -143,35 +143,29 @@ int main()
             CycleCheckinTradeBank(BankName); //Runs Tarjan's Algorithm on The Graph of TradeBank and checks for cycle
             printf("\nEnter 14 To View Operations Data\n\n");
         }
-        
-        
-        
+
         // else if(strcmp(Operation,"9")==0){
         //     printcurrencylist(CurrNode);
-            
+
         //     printf("\nEnter 14 for Operations Data\n\n");
         // }
-        
-        
-        
+
         // else if(strcmp(Operation,"10")==0){
         //     DeleteCurrList(CurrNode);
-            
+
         //     printf("\nEnter 14 for Operations Data\n\n");
         // }
-        
+
         else if (strcmp(Operation, "8") == 0)
         {
             PrintTradeBankList();
 
             printf("\nEnter 14 for Operations Data\n\n");
         }
-        
-        
-        
-        else if(strcmp(Operation,"8")==0){
+
+        else if (strcmp(Operation, "8") == 0)
+        {
             PrintTradeBankList2();
-            
         }
         else if (strcmp(Operation, "8") == 0) //Operation 11 (PRINT TRADE BANK) Starts Here
         {
@@ -191,7 +185,7 @@ int main()
             printf("Enter Destination Currency:");
             scanf("%s", destcurrency);
 
-            // user inputs 2 currencies. We run dijkistra on all Banks and print the best conversion possible with the name of respective Trade Bank 
+            // user inputs 2 currencies. We run dijkistra on all Banks and print the best conversion possible with the name of respective Trade Bank
 
             printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", DijkstraOnBankList(sourcecurrency, destcurrency).mincost, DijkstraOnBankList(sourcecurrency, destcurrency).TradeBankName);
 
@@ -208,7 +202,7 @@ int main()
             break; //exits the infinite loop
         }
 
-        else    //If Invalid input entered we flag it  
+        else //If Invalid input entered we flag it
         {
             printf("\nEnter A Valid Input\n");
             printf("\n");
