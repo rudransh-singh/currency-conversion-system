@@ -158,20 +158,20 @@ void DeleteVertex(PtrToGraphList G, int vertex)
     PtrToGraphNode prevgraphnode;                 //pointer to previous node
     for (int i = 0; i < G->NumberOfVertices; i++) //for loop to traverse all the vertices of the graph
     {
-        if (i == vertex)//we shall deal with the adjacency list of the vertex itself separately
+        if (i == vertex) //we shall deal with the adjacency list of the vertex itself separately
             continue;
         else
         {
             tempgraphnode = G->GraphVertexArray[i];
-            if (tempgraphnode == NULL)//if the ith vertex has no neighbour, skip
+            if (tempgraphnode == NULL) //if the ith vertex has no neighbour, skip
                 continue;
-            if (tempgraphnode->VertexID == vertex)//if the first neighbour is the input vertex then just remove it
+            if (tempgraphnode->VertexID == vertex) //if the first neighbour is the input vertex then just remove it
             {
                 G->GraphVertexArray[i] = tempgraphnode->next;
                 free(tempgraphnode);
                 continue;
             }
-            else//else go through the adjacency list and then remove
+            else //else go through the adjacency list and then remove
             {
                 tempgraphnode = G->GraphVertexArray[i]->next;
                 prevgraphnode = G->GraphVertexArray[i];
@@ -250,7 +250,7 @@ void RemoveEdge(PtrToGraphList G, int source, int dest)
         }
     }
 }
-stackhead initstack()//initializes the stack
+stackhead initstack() //initializes the stack
 {
     stackhead S;
     S = (ptrtostack)malloc(sizeof(stack));
@@ -258,7 +258,7 @@ stackhead initstack()//initializes the stack
     S->next = NULL;
     return S;
 }
-void push(ptrtostack S, int value)//pushes elements onto the stack
+void push(ptrtostack S, int value) //pushes elements onto the stack
 {
     ptrtostack x;
     x = initstack();
@@ -266,7 +266,7 @@ void push(ptrtostack S, int value)//pushes elements onto the stack
     x->next = S->next;
     S->next = x;
 }
-ptrtostack pop(ptrtostack S)//pops elements fromt the stack
+ptrtostack pop(ptrtostack S) //pops elements fromt the stack
 {
     ptrtostack temp1 = NULL;
     if (S->next == NULL)
@@ -280,7 +280,7 @@ ptrtostack pop(ptrtostack S)//pops elements fromt the stack
     return temp;
     //displaystack(S);
 }
-void displaystack(stackhead S)//displays the stack
+void displaystack(stackhead S) //displays the stack
 {
     if (S == NULL)
     {
@@ -303,7 +303,7 @@ void displaystack(stackhead S)//displays the stack
     }
 }
 
-int min(int a, int b)//returns minimum of two numbers
+int min(int a, int b) //returns minimum of two numbers
 {
     if (a < b)
         return a;
@@ -313,31 +313,31 @@ int min(int a, int b)//returns minimum of two numbers
 
 void depthfirst(PtrToGraphList G, stackhead S, int *id, int source, int ids[], int onstack[], int low[], int *scccount)
 {
-    push(S, source);//push the vertex into the stack
-    onstack[source] = 1;//set the onstack of vertex id to 1(meaning it is in the stack)
-    ids[source] = low[source] = source;//set the low link and id value to vertexid
+    push(S, source);                    //push the vertex into the stack
+    onstack[source] = 1;                //set the onstack of vertex id to 1(meaning it is in the stack)
+    ids[source] = low[source] = source; //set the low link and id value to vertexid
     PtrToGraphNode tempgraphnode;
     tempgraphnode = G->GraphVertexArray[source];
-    if (tempgraphnode != NULL)//traverse through the adjacency list
+    if (tempgraphnode != NULL) //traverse through the adjacency list
     {
         for (; tempgraphnode; tempgraphnode = tempgraphnode->next)
         {
-            if (ids[tempgraphnode->VertexID] == -1)//if node is unvisited then to dfs there
+            if (ids[tempgraphnode->VertexID] == -1) //if node is unvisited then to dfs there
                 depthfirst(G, S, id, tempgraphnode->VertexID, ids, onstack, low, scccount);
-            if (onstack[tempgraphnode->VertexID] == 1)//if the neighbour is visited then change low link value to min of source and neighbour
+            if (onstack[tempgraphnode->VertexID] == 1) //if the neighbour is visited then change low link value to min of source and neighbour
                 low[source] = min(low[source], low[tempgraphnode->VertexID]);
         }
     }
-    if (ids[source] == low[source])//if we reach the beggining of scc
+    if (ids[source] == low[source]) //if we reach the beggining of scc
     {
-        for (ptrtostack node = pop(S);; node = pop(S))//pop all elements from the stack, mark onstack as 0
+        for (ptrtostack node = pop(S);; node = pop(S)) //pop all elements from the stack, mark onstack as 0
         {
             onstack[node->value] = 0;
             low[node->value] = ids[source];
             if (node->value == source)
                 break;
         }
-        (*scccount)++;//increase the scccount
+        (*scccount)++; //increase the scccount
     }
 }
 
@@ -357,11 +357,11 @@ int Tarjan(PtrToGraphList G, int low[], int NumberofVertices)
         ids[i] = -1;
         low[i] = 0;
         onstack[i] = 0;
-    }//initialize the stack array, the lowlink value array, and the id array to UNVISITED
+    } //initialize the stack array, the lowlink value array, and the id array to UNVISITED
     for (int i = 0; i < NumberofVertices; i++)
     {
         if (ids[i] == -1)
-            depthfirst(G, S, &id, i, ids, onstack, low, &scccount);//perform a specialized depth first search
+            depthfirst(G, S, &id, i, ids, onstack, low, &scccount); //perform a specialized depth first search
     }
     return scccount;
 }

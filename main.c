@@ -111,7 +111,6 @@ int main()
 
             scanf("%s", destcurrency);
             printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", DijkstraOnBankList(sourcecurrency, destcurrency).mincost, DijkstraOnBankList(sourcecurrency, destcurrency).TradeBankName);
-
         }
 
         else if (strcmp(Operation, "10") == 0)
