@@ -27,10 +27,10 @@ int main()
         {
             for(int k=0;k<nc;k++)
             {
-                int doesedgeexist=rand()%4;
-                if(doesedgeexist==1)
+                int doesedgeexist=rand()%2;
+                if(doesedgeexist==1&& j!=k)
                 {
-                    int conversionrate=rand()%100;
+                    int conversionrate=rand()%20;
                     printf("3 B%d c%d c%d %d\n",i,j,k,conversionrate+1);
                 }
             }
