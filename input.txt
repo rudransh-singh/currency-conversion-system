@@ -43,7 +43,7 @@
 3 jpmorgan euro yen 3
 3 jpmorgan rupee yen 7
 3 jpmorgan rupee pound 8
-6 jpmorgan rupee pound
+4 jpmorgan rupee pound
 9 rupee dollar
 8
 7 sbi
