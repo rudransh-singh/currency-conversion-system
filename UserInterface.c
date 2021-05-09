@@ -845,28 +845,28 @@ void CycleCheckinTradeBank(char *BankName)
         {
 
             printf("cycle exists\n");
-            int cyclecounter = 0;
-            for (int i = 0; i < currencycount; i++)
-            {
-                cyclecounter = 0;
-                for (int j = 0; j < currencycount; j++)
-                {
-                    if (low[j] == i)
-                        cyclecounter++;
-                }
-                if (cyclecounter > 1)
-                {
-                    for (int j = 0; j < currencycount; j++)
-                    {
-                        if (low[j] == i)
-                        {
-                            printcurrencyofvertexid(Traverse->CurrencyHead, j);
-                            printf(" ");
-                        }
-                    }
-                    printf("\n");
-                }
-            }
+            // int cyclecounter = 0;
+            // for (int i = 0; i < currencycount; i++)
+            // {
+            //     cyclecounter = 0;
+            //     for (int j = 0; j < currencycount; j++)
+            //     {
+            //         if (low[j] == i)
+            //             cyclecounter++;
+            //     }
+            //     if (cyclecounter > 1)
+            //     {
+            //         for (int j = 0; j < currencycount; j++)
+            //         {
+            //             if (low[j] == i)
+            //             {
+            //                 printcurrencyofvertexid(Traverse->CurrencyHead, j);
+            //                 printf(" ");
+            //             }
+            //         }
+            //         printf("\n");
+            //     }
+            // }
         }
         return;
     }
