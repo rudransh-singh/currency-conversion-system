@@ -13,17 +13,17 @@
 
 void UserData()
 {                                                //function to print all the available commands to user
-    printf("1.Add Trade Bank\n");                //good
-    printf("2.Remove Trade Bank\n");             //good
-    printf("3.Add Currency Exchange\n");         //good          //****
-    printf("4.Remove Currency Exchange\n");      //good      //****
-    printf("5.Add Currency To TradeBank\n");     //good
-    printf("6.Delete Curency from Tradebank\n"); //good
-    printf("7.Search For Cycle\n");              //remove
-    printf("8.Print Trade Bank List\n");        //good           //****
-    printf("9.Dijkstra On Bank List\n"); //good            //****
-    printf("10.Show UserData\n");         //good
-    printf("11.Exit\n");                  //good
+    printf("1.Add Trade Bank\n");                
+    printf("2.Remove Trade Bank\n");             
+    printf("3.Add Currency Exchange\n");        
+    printf("4.Remove Currency Exchange\n");      
+    printf("5.Add Currency To TradeBank\n");     
+    printf("6.Delete Curency from Tradebank\n"); 
+    printf("7.Search For Cycle\n");              
+    printf("8.Print Trade Bank List\n");        
+    printf("9.Dijkstra On Bank List\n"); 
+    printf("10.Show UserData\n");         
+    printf("11.Exit\n");                  
 }
 
 int main()
@@ -32,7 +32,7 @@ int main()
     PtrToCurrencyNode CurrNode;       // pointer to Empty Currency List Node
     CurrNode = CreateEmptyCurrList(); //Creates an Empty Currency List
 
-    UserData(); //calls the function
+    UserData(); //calls the function to show the available commands
 
     while (1)
     { //starts infinite loop
