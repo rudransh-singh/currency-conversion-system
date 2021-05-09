@@ -1,8 +1,12 @@
 # Currency Conversion Program
 
+## Overview
+
 This is a simple program to convert one currency to another in accordance with the corresponding currency conversion rates and to find the best method of conversion between two currencies. 
 
-The main.c program has an infinite while loop to felicitate multiple queries. Each query is made by entering the number of the operation to be performed followed by additional information if required, like the name of the trade bank, currency conversion rate or currency name.
+## Usage
+
+The main.c program has an infinite while loop to facilitate multiple queries. Each query is made by entering the number of the operation to be performed followed by additional information if required, like the name of the trade bank, currency conversion rate or currency name.
 
 
 The list of possible operations along with their input command syntax is given below:
@@ -48,7 +52,7 @@ This command breaks out of the while loop and terminates the program.
 The 4 files that need to be compiled to generate the final executable binary file are priorityqueue.c, graph.c, UserInterface.c and main.c. The command to do this is:
 $ gcc priorityqueue.c graph.c UserInterface.c main.c -o final
 
-Here, final is the binary file that can be executed. To run the program, type the followind command:
+Here, final is the binary file that can be executed. To run the program, type the following command:
 $ ./final < input.txt
 
 The file input.txt contains a list of all user inputs for a single run of the program. The list of user commands in the file usually starts with "Add Trade Bank" and ends with "Exit". Each user command in input.txt is on a separate line. 
