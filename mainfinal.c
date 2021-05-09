@@ -28,10 +28,6 @@ void UserData()
 
 int main()
 {
-
-    PtrToCurrencyNode CurrNode;       // pointer to Empty Currency List Node
-    CurrNode = CreateEmptyCurrList(); //Creates an Empty Currency List
-
     UserData(); //calls the function to show the available commands
 
     while (1)
@@ -184,10 +180,15 @@ int main()
 
             printf("Enter Destination Currency:");
             scanf("%s", destcurrency);
-
-            // user inputs 2 currencies. We run dijkistra on all Banks and print the best conversion possible with the name of respective Trade Bank
-
-            printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", DijkstraOnBankList(sourcecurrency, destcurrency).mincost, DijkstraOnBankList(sourcecurrency, destcurrency).TradeBankName);
+            DijkstraBankInfo answer=DijkstraOnBankList(sourcecurrency, destcurrency);
+            if(answer.mincost==INT_MAX)
+            {
+                printf("no possible bank with the given conversion exists");
+            }
+            else
+            {
+            printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", answer.mincost, answer.TradeBankName);
+            }
 
             printf("\nEnter 14 for Operations Data\n\n");
         }

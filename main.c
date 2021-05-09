@@ -11,9 +11,6 @@
 int main()
 {
 
-    PtrToCurrencyNode CurrNode;
-    CurrNode = CreateEmptyCurrList();
-
     while (1)
     {
         char Operation[50];
@@ -110,7 +107,15 @@ int main()
             scanf("%s", sourcecurrency);
 
             scanf("%s", destcurrency);
-            printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", DijkstraOnBankList(sourcecurrency, destcurrency).mincost, DijkstraOnBankList(sourcecurrency, destcurrency).TradeBankName);
+            DijkstraBankInfo answer=DijkstraOnBankList(sourcecurrency, destcurrency);
+            if(answer.mincost==INT_MAX)
+            {
+                printf("no possible bank with the given conversion exists\n");
+            }
+            else
+            {
+            printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", answer.mincost, answer.TradeBankName);
+            }
         }
 
         else if (strcmp(Operation, "10") == 0)

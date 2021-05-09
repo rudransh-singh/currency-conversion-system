@@ -210,8 +210,13 @@ void AddTradeBank(char *BankName)
 void RemoveTradeBank(char *BankName)
 {
     PtrToTradebank current, previous, position;       //creates 3 temporary Pointers to struct TradeBank for traversal
+        previous = Head;                                  //Points to the 1st TradeBank
+    if(previous==NULL)
+    {
+        printf("No bank exists in the list");
+        return;
+    }
     current = Head->next;                             //Points to the 2nd TradeBank
-    previous = Head;                                  //Points to the 1st TradeBank
     if (strcmp(Head->NameOfTradeBank, BankName) == 0) //if the bank to be deleted is the first Trade bank in the list
     {
         position = Head;

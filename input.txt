@@ -48,8 +48,21 @@
 8
 7 sbi
 9 rupee pound
+4 sbi dollar yen
+4 sbi rupee euro
+7 sbi
+1 grameen
+5 sbi rupee
+5 sbI rupee
+5 grameen dirham
+5 grameen rupee
+9 rupee dirham
+3 grameen rupee dirham 5
+9 rupee dirham
+4 hdfc rupee dollar
+4 hdfc rupee yen
+7 hdfc
 10
-
 
 
 
