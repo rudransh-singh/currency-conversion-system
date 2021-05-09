@@ -52,3 +52,14 @@ Here, final is the binary file that can be executed. To run the program, type th
 $ ./final < input.txt
 
 The file input.txt contains a list of all user inputs for a single run of the program. The list of user commands in the file usually starts with "Add Trade Bank" and ends with "Exit". Each user command in input.txt is on a separate line. 
+
+## Running Program on Terminal
+
+```C
+git clone https://github.com/rudransh-singh/currency-conversion-system.git
+cd currency-conversion-system
+gcc main.c graph.c priorityqueue.c UserInterface.c
+```
+
+
+
