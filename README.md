@@ -8,40 +8,40 @@ The main.c program has an infinite while loop to felicitate multiple queries. Ea
 The list of possible operations along with their input command syntax is given below:
 (Note: The quotes ("") in the command syntax indicate strings, not actual quotes)
 
-1. Add Trade Bank
+1. Add Trade Bank<br>
 $ 1 "Trade Bank Name"
 
-2. Remove Trade Bank
+2. Remove Trade Bank<br>
 $ 2 "Trade Bank Name"
 
-3. Add Currency Exchange
+3. Add Currency Exchange<br>
 $ 3 "Trade Bank Name" "Source Currency" "Destination Currency" "Conversion Rate"
 This is to convert from source to destination currency. A directed edge is added to the graph of the trade bank from source currency to destination currency.
 
-4. Remove Currency Exchange
+4. Remove Currency Exchange<br>
 $ 4 "Trade Bank Name" "Currency 1" "Currency 2"
 This removes the conversion from currency 1 to currency 2 in the specified trade bank.
 
-5. Add Currency to Trade Bank
+5. Add Currency to Trade Bank<br>
 $ 5 "Trade Bank Name" "Currency"
 
-6. Search for Cycle (of currency exchanges) in Trade Bank
-$ 6 "Trade Bank Name"
+6. Remove Currency from Trade Bank<br>
+$ 6 "Trade Bank Name" "Currency"
+
+7. Search for Cycle (of currency exchanges) in Trade Bank<br>
+$ 7 "Trade Bank Name"
 If a cycle is found, "cycle found" is printed and the actual cycle (currency 1 -----> currency 2) is printed on a new line.
 
-8. Remove Currency from Trade Bank
-$ 8 "Trade Bank Name" "Currency"
-
-11. Print Trade Bank list
-$ 11
+8. Print Trade Bank list<br>
+$ 8
 Lists the current trade banks present in the list.
 
-13. Find best path to convert from currency A to currency B
-$ 13 "Currency A" "Currency B"
+9. Find best path to convert from currency A to currency B<br>
+$ 9 "Currency A" "Currency B"
 Outputs a positive integer to indicate the least cost of the required conversion. Prints INT_MAX if it is impossible to convert. 
 
-15. Exit
-$ 15
+10. Exit<br>
+$ 10
 This command breaks out of the while loop and terminates the program.
 
 
