@@ -311,7 +311,7 @@ void AddCurrencyExchange1(char *BankName, char *Currency1, char *Currency2, int 
 
         else if (!Currency2Exists && Currency1Exists) // Currency 1 exists but currency 2 doesnt
         {
-            printf("one of the two currencies does not exist\m");
+            printf("one of the two currencies does not exist\n");
             return;
         }
         else if (Currency2Exists && !Currency1Exists) // Currency 1 doesntexists but currency 2 exists
