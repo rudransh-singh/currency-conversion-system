@@ -48,12 +48,20 @@ Outputs a positive integer to indicate the least cost of the required conversion
     $ 10<br>
 This command breaks out of the while loop and terminates the program.
 
+## Compilation and Execution
 
-The 4 files that need to be compiled to generate the final executable binary file are priorityqueue.c, graph.c, UserInterface.c and main.c. The command to do this is:
+The 4 files that need to be compiled to generate the final executable binary file are priorityqueue.c, graph.c, UserInterface.c and main.c. The command to do this is:<br>
 $ gcc priorityqueue.c graph.c UserInterface.c main.c -o final
 
-Here, final is the binary file that can be executed. To run the program, type the following command:
+Here, final is the binary file that can be executed. To run the program, type the following command:<br>
 $ ./final < input.txt
+
+The program can also be run using the following shell script:<br>
+```c 
+#!/bin/sh
+gcc priorityqueue.c graph.c UserInterface.c main.c -o final
+./final < input.txt
+```
 
 The file input.txt contains a list of all user inputs for a single run of the program. The list of user commands in the file usually starts with "Add Trade Bank" and ends with "Exit". Each user command in input.txt is on a separate line. 
 
