@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a simple program to convert one currency to another in accordance with the corresponding currency conversion rates and to find the best method of conversion between two currencies. 
+This is a simple program to convert one currency to another in accordance with the corresponding currency conversion rates and to find the best method of conversion between two currencies using Dijkstra's algorithm. The program can also detect a cycle of conversions among currencies in a trade bank.
 
 ## Usage
 
