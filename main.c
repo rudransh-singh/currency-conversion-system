@@ -114,7 +114,7 @@ int main()
             }
             else
             {
-            printf("The shortest conversion rate between the two currencies is %d from Bank= %s \n", answer.mincost, answer.TradeBankName);
+            printf("The shortest conversion rate from %s to %s is %d from Bank= %s \n",sourcecurrency,destcurrency, answer.mincost, answer.TradeBankName);
             }
         }
 

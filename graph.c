@@ -100,7 +100,7 @@ dijkstra dijkstraalgo(PtrToGraphList G, int NumberOfVertices, int startindex)
     }
     answer.dist[startindex] = 0; //set startindex dist to zero to kickstart algo
     PtrToMinHeap PQ = NULL;      //create empty priority queue
-    PQ = CreateHeap(10000);
+    PQ = CreateHeap(100000);
     InsertMinHeapKeyValue(PQ, startindex, 0); //This will ensure that algo is kickstarted properly
     while (PQ->heap_size != 0)
     {
