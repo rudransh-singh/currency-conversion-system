@@ -31,6 +31,7 @@ int main()
                 if(doesedgeexist==1&& j!=k)
                 {
                     int conversionrate=rand()%20;
+                    conversionrate+=rand()%20;
                     printf("3 B%d c%d c%d %d\n",i,j,k,conversionrate+1);
                 }
             }

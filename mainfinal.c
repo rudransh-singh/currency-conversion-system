@@ -167,17 +167,6 @@ int main()
         //     printf("\nEnter 14 for Operations Data\n\n");
         // }
 
-        else if (strcmp(Operation, "8") == 0)
-        {
-            PrintTradeBankList();
-
-            printf("\nEnter 14 for Operations Data\n\n");
-        }
-
-        else if (strcmp(Operation, "8") == 0)
-        {
-            PrintTradeBankList2();
-        }
         else if (strcmp(Operation, "8") == 0) //Operation 11 (PRINT TRADE BANK) Starts Here
         {
             PrintTradeBankList2(); //Prints all the available Trade Banks and the list of Currencies supported by them respectively

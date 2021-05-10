@@ -71,9 +71,12 @@ gcc priorityqueue.c graph.c UserInterface.c mainfinal.c -o MainWithUI
 runwithoutUI.sh<br>
 ```c
 #!/bin/sh
+gcc randominputgenerator.c -o inputgenerator
+./inputgenerator > randominput.txt
 gcc priorityqueue.c graph.c UserInterface.c main.c -o MainNoUI
-./MainNoUI < input.txt
+./MainNoUI < randominput.txt
 ```
+In order to use the program without ui use ./runwithoutUI and to use with UI do ./runUI.sh
 
 The file input.txt contains a list of all user inputs for a single run of the program. The list of user commands in the file usually starts with "Add Trade Bank" and ends with "Exit". Each user command in input.txt is on a separate line. 
 
