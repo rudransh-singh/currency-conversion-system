@@ -75,9 +75,16 @@ int main()
 
             printf("Enter Conversion Rate:");
             scanf("%d", &ConversionRate);
+            
+            if(strcmp(Currency1,Currency2)==0)
+            {
+                printf("Both currencies are same, please try again");
+            }
 
+            else
+            {
             AddCurrencyExchange1(TradeBank, Currency1, Currency2, ConversionRate); // Adds Conversion Rate (Edge) between Currency1 Currency2 in the Graph
-
+            }
             printf("\nEnter 14 To View Operations Data\n\n");
         }
 
@@ -96,8 +103,16 @@ int main()
             printf("Enter The Destination:");
             scanf("%s", Currency2);
 
-            RemoveCurrencyExchange(TradeBank, Currency1, Currency2); // Removes Conversion Rate (Edge) between Currency1 Currency2 in the Graph
 
+            if(strcmp(Currency1,Currency2)==0)
+            {
+                printf("Both currencies are same, please try again");
+            }
+
+            else
+            {
+            RemoveCurrencyExchange(TradeBank, Currency1, Currency2); // Removes Conversion Rate (Edge) between Currency1 Currency2 in the Graph
+            }
             printf("\nEnter 14 To View Operations Data\n\n");
         }
 
@@ -180,6 +195,14 @@ int main()
 
             printf("Enter Destination Currency:");
             scanf("%s", destcurrency);
+
+            if(strcmp(sourcecurrency,destcurrency)==0)
+            {
+                printf("Both currencies are same, please try again");
+            }
+
+            else
+            {
             DijkstraBankInfo answer=DijkstraOnBankList(sourcecurrency, destcurrency);
             if(answer.mincost==INT_MAX)
             {
@@ -188,6 +211,7 @@ int main()
             else
             {
             printf("The shortest conversion rate from %s to %s is %d from Bank= %s \n",sourcecurrency,destcurrency, answer.mincost, answer.TradeBankName);
+            }
             }
 
             printf("\nEnter 14 for Operations Data\n\n");

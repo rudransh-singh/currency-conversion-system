@@ -46,8 +46,14 @@ int main()
             scanf("%s", Currency2);
 
             scanf("%d", &ConversionRate);
-
+            if(strcmp(Currency1,Currency2)==0)
+            {
+                printf("Both currencies are same, please try again");
+            }
+            else
+            {
             AddCurrencyExchange1(TradeBank, Currency1, Currency2, ConversionRate);
+            }
         }
 
         else if (strcmp(Operation, "4") == 0)
@@ -61,8 +67,14 @@ int main()
             scanf("%s", Currency1);
 
             scanf("%s", Currency2);
-
+            if(strcmp(Currency1,Currency2)==0)
+            {
+                printf("Both currencies are same, please try again");
+            }
+            else
+            {
             RemoveCurrencyExchange(TradeBank, Currency1, Currency2);
+            }
         }
 
         else if (strcmp(Operation, "5") == 0)
@@ -107,6 +119,12 @@ int main()
             scanf("%s", sourcecurrency);
 
             scanf("%s", destcurrency);
+            if(strcmp(sourcecurrency,destcurrency)==0)
+            {
+                printf("Both currencies are same, please try again");
+            }
+            else
+            {
             DijkstraBankInfo answer=DijkstraOnBankList(sourcecurrency, destcurrency);
             if(answer.mincost==INT_MAX)
             {
@@ -115,6 +133,7 @@ int main()
             else
             {
             printf("The shortest conversion rate from %s to %s is %d from Bank= %s \n",sourcecurrency,destcurrency, answer.mincost, answer.TradeBankName);
+            }
             }
         }
 
